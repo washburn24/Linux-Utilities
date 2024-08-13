@@ -11,8 +11,9 @@ sudo dnf -y install gnome-shell-extension-just-perfection
 ```
 ### Bash Configuration Examples
 A specific bash script will be very user and preference specific, but here are some examples.  Ordering is somewhat important here as you obviously can't point to a theme that's not installed yet, and some of this is redudant if your /home is it's own partition so that clean installs don't modify it.  Your mileage may vary.
-```
+
 Cloning some Github repos:
+```
 git clone https://github.com/vinceliuice/WhiteSur-icon-theme ~/Documents/Software/Git/WhiteSur-icon-theme
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme ~/Documents/Software/Git/WhiteSur-gtk-theme
 ```
@@ -42,7 +43,7 @@ sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrom
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
 flatpak -y install flathub zoom geary  # Multi install for built in apps, specifying Flathub as the repo
 ```
-Any custom configuration (my icon set is a mix of about three different Mac-like themes)
+Any custom configuration (my icon set is a mix of about three different Mac-like themes):
 ```
 tar -C $HOME/.icons -xvf $HOME/.icons/WhiteSurCustom.tar.xz
 rsync -a -v --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
