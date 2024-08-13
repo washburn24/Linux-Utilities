@@ -48,3 +48,4 @@ tar -C $HOME/.icons -xvf $HOME/.icons/WhiteSurCustom.tar.xz
 rsync -a -v --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
 tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
 ```
+These examples are geared to Fedora for syntax but other distros would be similar (Ubuntu would use apt as the package manager instead of dnf, sandboxed apps would default to snap with explicitly installed Flatpak support, etc).  Real bash shell example coming soon.
