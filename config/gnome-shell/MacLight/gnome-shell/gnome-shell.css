@@ -1,0 +1,59 @@
+/*
+MacLight CSS Shell
+This file is designed to mimic a Mac-like look and feel for the dock and top bar, starting with Yaru-blue on default Ubuntu 23.10
+  - Prerequisites: User Themes extension to point to this file and Just Perfection extension for moving the clock to the far right
+  - As of Ubuntu 23.10/Gnome 45 Ubuntu Dock comes as a built in extension that lets you control the dock appearance in the GUI
+  - Any icon theme is fine, for Mac-like (through Sonoma 14.x), see 'https://github.com/vinceliuice/WhiteSur-icon-theme'
+  - Other aeshtetics cleaned up here: black text/icons on light top bar,  icon spacing for dock and top bar, and others as documented below
+*/
+
+@import url("/usr/share/gnome-shell/theme/Yaru-blue/gnome-shell.css");
+
+/* Controls the top bar color, #ebebeb is very light gray, #a4d0ff is blue-ish gray to match the translucent bar on my Mac */
+#panel {
+  background-color: #a4d0ff;
+  box-shadow: inset 0 0px 0 0 black; }
+
+/* Controls the color of the panel system icons and the spacing between different groups */
+#panel .panel-button {
+  color: black;
+  -natural-hpadding: 10px;
+  -minimum-hpadding: 6px; }
+
+/* Takes explicit control of the top bar system icon size and spacing (bug fix for Fedora 40/Gnome 46 weirdness) */
+#panel .panel-button .system-status-icon {
+  icon-size: 1.11em;
+  padding: 4px;
+  margin: 0 2px; }
+
+/* Controls the padding of the clock, to space it to system icons when the clock is moved to the far right */
+.clock-display-box .clock {
+  font-weight: bold;
+  padding-left: 3px;
+  padding-right: 8px; }
+
+/* Controls the color of the workspaces button (pre Gnome 45 or so this was "Activities" hence the naming) */
+#panel .panel-button#panelActivities .workspace-dot {
+  background-color: black; }
+
+/* Mac doesn't contrast mouse hover over system icons as they're not grouped, so this does that with darker gray for light top bars */
+#panel .panel-button:hover {
+  box-shadow: inset 0 0 0 100px rgba(12, 12, 12, 0.15); }
+#panel .panel-button.clock-display:hover .clock {
+  box-shadow: inset 0 0 0 100px rgba(12, 12, 12, 0.15); }
+
+/* Makes the Activities button go light on press, this makes it common to the clock and system tray but I don't know why they're different */
+#panel .panel-button:active:hover, #panel .panel-button:focus:hover, #panel .panel-button:checked:hover {
+  box-shadow: inset 0 0 0 100px rgba(242, 242, 242, 0.35); }
+
+
+
+/* The below are DashtoDock/Ubuntu Dock controls that are better handled in DashtoDock's CSS file when using the extension directly */
+/* Controls the padding/spacing around the Show Apps launcher in the dock */
+.dash-item-container .show-apps .overview-icon {
+  padding: 0px; }
+
+/* Controls the padding/spacing around application icons in the dock */
+.dash-item-container .app-well-app .overview-icon, .dash-item-container .grid-search-result .overview-icon {
+  padding: 0px;
+  border-radius: 10px; }
