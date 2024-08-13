@@ -1,7 +1,7 @@
 # Linux Utilities
  Some utilities for Linux/Gnome to automate setup of a clean install
 
-###Overview
+### Overview
 These tools are designed to make clean installs of Linux/Gnome enviroments automated including installing applications, cloning Github repos, installing themes and automatically controlling them via Tweaks and Themes.  There is also some custom configuration that can be easily automatically controlled.  Note that installing themes programatically requires a reload of Gnome Shell (a logout on Wayland) and makes them non-User Installed, which I don't really like.  So, at current I'm manually configuring a minimal set of commands that really should be done from the command line like so but can't be unless you're on an older WM:
 
 ```
