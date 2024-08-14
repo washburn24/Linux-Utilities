@@ -14,8 +14,9 @@ A specific bash script will be very user and preference specific, but here are s
 
 Cloning some Github repos:
 ```
-git clone https://github.com/vinceliuice/WhiteSur-icon-theme ~/Documents/Software/Git/WhiteSur-icon-theme
-git clone https://github.com/vinceliuice/WhiteSur-gtk-theme ~/Documents/Software/Git/WhiteSur-gtk-theme
+git clone https://github.com/vinceliuice/WhiteSur-icon-theme $HOME/Documents/Software/Git/WhiteSur-icon-theme
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme $HOME/Documents/Software/Git/WhiteSur-gtk-theme
+git clone https://github.com/washburn24/Linux-Utilities $HOME/Documents/Linux-Utilities
 ```
 Installing some GTK and icon themes:
 ```
