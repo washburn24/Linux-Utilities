@@ -38,8 +38,8 @@ gsettings set org.gnome.shell.extensions.just-perfection notification-banner-pos
 if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
-rm -f google-chrome-stable_current_x86_64.rpm
 sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
+rm -f google-chrome-stable_current_x86_64.rpm
 sudo dnf -y install tlp tlp-rdw  # Battery life optimization tools
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
 flatpak -y install flathub zoom geary inkscape diffuse retext tlpui org.vim.Vim  # Flathub as repo, multi install
