@@ -16,8 +16,8 @@ cp $HOME/Documents/Linux-Utilities/config/icons/WhiteSurCustom.tar.xz $HOME/.ico
 tar -C $HOME/.icons -xvf $HOME/.icons/WhiteSurCustom.tar.xz
 rsync -a -v --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
 tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
-rsync -a -v --ignore-existing $HOME/Documents/Linux-Utilities/config/gnome-shell/MacLight/* $HOME/.themes/
-rsync -a -v --ignore-existing $HOME/Documents/Linux-Utilities/config/gnome-shell/MacDark/* $HOME/.themes/
+rsync -a -v --ignore-existing $HOME/Documents/Linux-Utilities/config/gnome-shell/MacLight/* $HOME/.themes/MacLight/
+rsync -a -v --ignore-existing $HOME/Documents/Linux-Utilities/config/gnome-shell/MacDark/* $HOME/.themes/MacDark/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/snd.conf /etc/modprobe.d/  # Bug fix for speaker control on Lenovo Yoga 9
 
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting:
