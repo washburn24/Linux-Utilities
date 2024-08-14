@@ -26,6 +26,7 @@ gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
 gsettings set org.gnome.shell.extensions.user-theme name 'MacLight'
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close:appmenu'
+gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 flatpak -y update  # Possibly redundant but makes Flatpaks look for the new icon theme
 
 # Controlling Just Perfection from the command line (move clock and notifications to the right):
