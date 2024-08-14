@@ -1,5 +1,5 @@
 # Linux Utilities
- Some utilities for Linux/Gnome to automate setup of a clean install
+ Some utilities for Linux/Gnome to automate the path between clean install and useful system.
 
 ### Overview
 These tools are designed to make clean installs of Linux/Gnome enviroments automated including installing applications, cloning Github repos, installing themes and automatically controlling them via Tweaks and Themes.  There is also some custom configuration that can be easily automatically controlled.  Note that installing themes programatically requires a reload of Gnome Shell (a logout on Wayland) and makes them non-User Installed, which I don't really like.  So, at current I'm manually configuring a minimal set of commands that really should be done from the command line like so but can't be unless you're on an older WM:
@@ -48,6 +48,5 @@ Any custom configuration (my icon set is a mix of about three different Mac-like
 ```
 tar -C $HOME/.icons -xvf $HOME/.icons/WhiteSurCustom.tar.xz
 rsync -a -v --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
-tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
 ```
-These examples are geared to Fedora for syntax but other distros would be similar (Ubuntu would use apt as the package manager instead of dnf, sandboxed apps would default to snap without explicitly installed Flatpak support, etc).  Real bash shell example coming soon.
+These examples are geared to Fedora for syntax but other distros would be similar (Debian would use apt as the package manager instead of dnf, Ubuntu would do that as well as having sandboxed apps default to Snap without explicitly installed Flatpak support, etc).  A functional bash shell example for Fedora Workstation 40 is in the /tools subdirectory, everything it needs is self contained in public git repos including this one, which it will clone automatically.
