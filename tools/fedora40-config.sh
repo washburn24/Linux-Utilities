@@ -13,11 +13,10 @@ $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n W
 
 # Make some custom changes that are only relevant to me:
 cp $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz $HOME/.icons
-tar -C $HOME/.icons -xvf $HOME/.icons/WhiteSurCustom.tar.xz
-rsync -a -v --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
-#tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
-rsync -a -v --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
-rsync -a -v --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
+tar -C $HOME/.icons -xf $HOME/.icons/WhiteSurCustom.tar.xz
+rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
+rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
+rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/snd.conf /etc/modprobe.d/  # Bug fix for speaker control on Lenovo Yoga 9
 
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting:
@@ -35,14 +34,11 @@ gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position 1
 gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position-offset 6
 gsettings set org.gnome.shell.extensions.just-perfection notification-banner-position 2
 
-# Automatically set and configure background image
-cp -f $HOME/Documents/Linux-Utilities/config/Pictures/Toscana.jpg $HOME/Pictures
-gsettings set org.gnome.desktop.background picture-uri 'file:///$HOME/Pictures/Toscana.jpg'
-gsettings set org.gnome.desktop.background picture-uri-dark 'file:///$HOME/Pictures/Toscana.jpg'
-gsettings set org.gnome.desktop.background picture-options 'stretched'
-
 # Install some applications:
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
+rm -f google-chrome-stable_current_x86_64.rpm
 sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
 sudo dnf -y install tlp tlp-rdw  # Battery life optimization tools
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
