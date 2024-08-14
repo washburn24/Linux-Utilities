@@ -37,6 +37,5 @@ gsettings set org.gnome.shell.extensions.just-perfection notification-banner-pos
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
-flatpak -y install flathub zoom geary inkscape diffuse retext # Multi install for Flatpak apps, specifying Flathub as the repo
-flatpak -y install fedora org.gnome.mines org.gnome.sudoku org.gnome.chess aisleriot  # Multi install for Flatpak apps, specifying Fedora as the repo
-
+flatpak -y install flathub zoom geary inkscape diffuse retext # Flathub as repo, multi install
+flatpak -y install fedora org.gnome.Mines org.gnome.Sudoku org.gnome.Chess org.gnome.Aisleriot  # Fedora as repo, multi install
