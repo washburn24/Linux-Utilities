@@ -12,7 +12,7 @@ $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 
 # Make some custom changes that are only relevant to me:
-cp $HOME/Documents/Linux-Utilities/config/icons/WhiteSurCustom.tar.xz $HOME/.icons
+cp $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz $HOME/.icons
 tar -C $HOME/.icons -xvf $HOME/.icons/WhiteSurCustom.tar.xz
 rsync -a -v --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
 #tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
@@ -36,8 +36,8 @@ gsettings set org.gnome.shell.extensions.just-perfection notification-banner-pos
 
 # Automatically set and configure background image
 cp -f $HOME/Documents/Linux-Utilities/config/Pictures/Toscana.jpg $HOME/Pictures
-gsettings set org.gnome.desktop.background picture-uri 'file:///~/Pictures/Toscana.jpg'
-gsettings set org.gnome.desktop.background picture-uri-dark 'file:///~/Pictures/Toscana.jpg'
+gsettings set org.gnome.desktop.background picture-uri 'file:///$HOME/Pictures/Toscana.jpg'
+gsettings set org.gnome.desktop.background picture-uri-dark 'file:///$HOME/Pictures/Toscana.jpg'
 gsettings set org.gnome.desktop.background picture-options 'stretched'
 
 # Install some applications:
