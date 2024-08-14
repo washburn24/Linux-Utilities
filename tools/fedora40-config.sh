@@ -34,6 +34,12 @@ gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position 1
 gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position-offset 6
 gsettings set org.gnome.shell.extensions.just-perfection notification-banner-position 2
 
+# Automatically set and configure background image
+cp -f $HOME/Documents/Linux-Utilities/config/Pictures/Toscana.jpg $HOME/Pictures
+gsettings set org.gnome.desktop.background picture-uri 'file:///~/Pictures/Toscana.jpg'
+gsettings set org.gnome.desktop.background picture-uri-dark 'file:///~/Pictures/Toscana.jpg'
+gsettings set org.gnome.desktop.background picture-options 'stretched'
+
 # Install some applications:
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
