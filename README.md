@@ -2,15 +2,15 @@
  Some utilities for Linux/Gnome to automate the path between clean install and useful system.
 
 ### Overview
-These tools are designed to make clean installs of Linux/Gnome enviroments automated including installing applications, cloning Github repos, installing themes and automatically controlling them via Tweaks and Themes.  There is also some custom configuration that can be easily automatically controlled.  Note that installing themes programatically requires a reload of Gnome Shell (a logout on Wayland) and makes them non-User Installed, which I don't really like.  So, at current I'm manually configuring a minimal set of commands that really should be done from the command line like so but can't be unless you're on an older WM:
+These tools are designed to make clean installs of Linux/Gnome enviroments automated including installing applications, cloning Github repos, installing themes and automatically controlling them via Tweaks and Themes.  There is also some custom configuration that can be easily automatically controlled.  My system is skinned to look like Mac OS with default Adwaita window controls, but any theme/icon combo would work in a similar way.  Note that installing themes programatically requires a reload of Gnome Shell (a logout on Wayland) and makes them non-User Installed, which I don't really like.  Distros that don't have Flatpak preinstalled (like Debian) also require configuring before the Flatpak portions of this scripting will work.  So, at current I'm manually configuring a minimal set of commands that really should be done from the command line (like the below) but can't be unless you're on an older WM:
 
 ```
-flatpak -y install flathub com.mattjakeman.ExtensionManager
+flatpak -y install flathub ExtensionManager
 sudo dnf -y install gnome-shell-extension-user-theme
 sudo dnf -y install gnome-shell-extension-just-perfection
 ```
 ### Bash Configuration Examples
-A specific bash script will be very user and preference specific, but here are some examples.  Ordering is somewhat important here as you obviously can't point to a theme that's not installed yet, and some of this is redudant if your /home is it's own partition so that clean installs don't modify it.  Your mileage may vary.
+A specific bash script will be very user and preference specific, but here are some examples.  Ordering is somewhat important here as you obviously can't point to a theme that's not installed yet, and some of this is redudant if your /home is it's own partition so that clean installs don't have to format it, but that redudancy is fine and won't interrupt the script.  Your mileage may vary by distro and user specific requirements.
 
 Cloning some Github repos:
 ```
@@ -44,9 +44,10 @@ sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrom
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
 flatpak -y install flathub zoom geary  # Multi install for built in apps, specifying Flathub as the repo
 ```
-Any custom configuration (my icon set is a mix of about three different Mac-like themes):
+Any custom configuration or known bug fixes for specific hardware:
 ```
 tar -C $HOME/.icons -xvf $HOME/.icons/WhiteSurCustom.tar.xz
 rsync -a -v --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
+sudo cp -f $HOME/Documents/Linux-Utilities/audio/snd.conf /etc/modprobe.d/
 ```
-These examples are geared to Fedora for syntax but other distros would be similar (Debian would use apt as the package manager instead of dnf, Ubuntu would do that as well as having sandboxed apps default to Snap without explicitly installed Flatpak support, etc).  A functional bash shell example for Fedora Workstation 40 is in the /tools subdirectory, everything it needs is self contained in public git repos including this one, which it will clone automatically.
+These examples are geared to Fedora for syntax and clean install toolset but other distros would be similar (Debian would use apt as the package manager instead of dnf, Ubuntu would do that as well as having sandboxed apps default to Snap without explicitly installed Flatpak support, etc).  A functional bash shell example for Fedora Workstation 40 is in the /tools subdirectory, everything it needs is self contained in public git repos including this one, which it will clone automatically.
