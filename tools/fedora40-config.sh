@@ -42,7 +42,7 @@ sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrom
 rm -f google-chrome-stable_current_x86_64.rpm
 sudo dnf -y install tlp tlp-rdw  # Battery life optimization tools
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
-flatpak -y install flathub zoom geary inkscape diffuse retext tlpui org.vim.Vim  # Flathub as repo, multi install
+flatpak -y install flathub zoom geary spotify inkscape diffuse retext tlpui org.vim.Vim  # Flathub as repo, multi install
 flatpak -y install fedora org.gnome.Mines org.gnome.Sudoku org.gnome.Chess org.gnome.Aisleriot  # Fedora as repo, multi install
 
 # Install flameshot screen capture software and set PrintScreen shortcut to .sh to work around permissions bug
