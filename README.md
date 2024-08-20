@@ -24,13 +24,22 @@ sudo dnf -y install gnome-tweaks adw-gtk3-theme yaru-theme
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -n WhiteSurAlt
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 ```
-Command line controls of Gnome Tweaks (you can use 'dconf watch /' to get syntax for these):
+Command line controls of Gnome settings (you can use 'dconf watch /' to get syntax for gsettings set commands):
+```
+gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll 'false'
+gsettings set org.gnome.desktop.interface clock-format '12h'
+gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
+gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
+gsettings set org.gnome.desktop.control-center window-state 'uint32 0'
+```
+Command line controls of Gnome Tweaks:
 ```
 gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
 gsettings set org.gnome.shell.extensions.user-theme name 'MacLight'
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close:appmenu'
 ```
+
 Command line controls of Just Perfection (this snippet moves the clock and notification to the right):
 ```
 gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position 1

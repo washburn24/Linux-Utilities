@@ -46,15 +46,22 @@ gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position 1
 gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position-offset 6
 gsettings set org.gnome.shell.extensions.just-perfection notification-banner-position 2
 
+# Gnome general settings adjustments
+gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll 'false'
+gsettings set org.gnome.desktop.interface clock-format '12h'
+gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
+gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
+gsettings set org.gnome.control-center window-state 'uint32 0'
+
 # Install some applications:
 if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
 sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
 rm -f google-chrome-stable_current_x86_64.rpm
-sudo dnf -y install tlp tlp-rdw  # Battery life optimization tools
+sudo dnf -y install geary tlp tlp-rdw  # TLP are battery life optimization tools
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
-flatpak -y install flathub zoom geary spotify inkscape diffuse retext tlpui org.vim.Vim  # Flathub as repo, multi install
+flatpak -y install flathub zoom spotify inkscape diffuse retext tlpui org.vim.Vim  # Flathub as repo, multi install
 flatpak -y install fedora org.gnome.Mines org.gnome.Sudoku org.gnome.Chess org.gnome.Aisleriot  # Fedora as repo, multi install
 
 # Install flameshot screen capture software and set PrintScreen shortcut to .sh to work around permissions bug

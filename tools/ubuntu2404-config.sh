@@ -57,10 +57,10 @@ if [ ! -f google-chrome-stable_current_amd64.deb ]; then
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
 sudo apt -y install ./google-chrome-stable_current_amd64.deb  # Grab Google Chrome's latest and install locally
-sudo apt -y install neofetch gnome-contacts gnome-calendar
+sudo apt -y install neofetch gnome-contacts gnome-calendar geary
 rm -f google-chrome-stable_current_amd64.deb
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
-flatpak -y install flathub zoom geary spotify inkscape diffuse retext org.vim.Vim  # Flathub as repo, multi install
+flatpak -y install flathub zoom spotify inkscape diffuse retext org.vim.Vim  # Flathub as repo, multi install
 
 # Install flameshot screen capture software and set PrintScreen shortcut to .sh to work around permissions bug
 sudo apt -y install flameshot
