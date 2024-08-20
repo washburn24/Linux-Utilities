@@ -2,10 +2,21 @@
 
 # Clone some GitHub repos...
 sudo apt -y install git
-git clone https://github.com/vinceliuice/WhiteSur-icon-theme $HOME/Documents/Software/Git/WhiteSur-icon-theme
-git clone https://github.com/vinceliuice/WhiteSur-gtk-theme $HOME/Documents/Software/Git/WhiteSur-gtk-theme
-git clone https://github.com/washburn24/Linux-Utilities $HOME/Documents/Linux-Utilities
-
+if [ ! -d $HOME/Documents/Software/Git/WhiteSur-icon-theme ]; then
+    git clone https://github.com/vinceliuice/WhiteSur-icon-theme $HOME/Documents/Software/Git/WhiteSur-icon-theme
+else
+    git -C $HOME/Documents/Software/Git/WhiteSur-icon-theme pull origin master
+fi
+if [ ! -d $HOME/Documents/Software/Git/WhiteSur-gtk-theme ]; then
+    git clone https://github.com/vinceliuice/WhiteSur-gtk-theme $HOME/Documents/Software/Git/WhiteSur-gtk-theme
+else
+    git -C $HOME/Documents/Software/Git/WhiteSur-gtk-theme pull origin master
+fi
+if [ ! -d $HOME/Documents/Linux-Utilities ]; then
+    git clone https://github.com/washburn24/Linux-Utilities $HOME/Documents/Linux-Utilities
+else
+    git -C $HOME/Documents/Linux-Utilities pull origin main
+fi
 # Install some gtk and icon themes:
 mkdir $HOME/.icons $HOME/.themes
 sudo apt -y install gnome-tweaks
@@ -48,7 +59,6 @@ fi  # Checking for file existence helps with script debug but isn't very useful 
 sudo apt -y install ./google-chrome-stable_current_amd64.deb  # Grab Google Chrome's latest and install locally
 sudo apt -y install neofetch gnome-contacts gnome-calendar
 rm -f google-chrome-stable_current_amd64.deb
-#sudo dnf -y install tlp tlp-rdw  # Battery life optimization tools
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
 flatpak -y install flathub zoom geary spotify inkscape diffuse retext org.vim.Vim  # Flathub as repo, multi install
 

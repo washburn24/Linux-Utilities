@@ -1,9 +1,21 @@
 #!/usr/bin/env bash
 
 # Clone some GitHub repos...
-git clone https://github.com/vinceliuice/WhiteSur-icon-theme $HOME/Documents/Software/Git/WhiteSur-icon-theme
-git clone https://github.com/vinceliuice/WhiteSur-gtk-theme $HOME/Documents/Software/Git/WhiteSur-gtk-theme
-git clone https://github.com/washburn24/Linux-Utilities $HOME/Documents/Linux-Utilities
+if [ ! -d $HOME/Documents/Software/Git/WhiteSur-icon-theme ]; then
+    git clone https://github.com/vinceliuice/WhiteSur-icon-theme $HOME/Documents/Software/Git/WhiteSur-icon-theme
+else
+    git -C $HOME/Documents/Software/Git/WhiteSur-icon-theme pull origin master
+fi
+if [ ! -d $HOME/Documents/Software/Git/WhiteSur-gtk-theme ]; then
+    git clone https://github.com/vinceliuice/WhiteSur-gtk-theme $HOME/Documents/Software/Git/WhiteSur-gtk-theme
+else
+    git -C $HOME/Documents/Software/Git/WhiteSur-gtk-theme pull origin master
+fi
+if [ ! -d $HOME/Documents/Linux-Utilities ]; then
+    git clone https://github.com/washburn24/Linux-Utilities $HOME/Documents/Linux-Utilities
+else
+    git -C $HOME/Documents/Linux-Utilities pull origin main
+fi
 
 # Install some gtk and icon themes:
 mkdir $HOME/.icons $HOME/.themes
