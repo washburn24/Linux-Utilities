@@ -25,7 +25,7 @@ sudo flatpak install -y org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-da
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -n WhiteSurAlt
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 
-# Install some applications
+# Install some applications:
 sudo zypper -n install geary flameshot retext inkscape  # openSUSE native repo, multi install
 sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim  # Flathub as repo, multi install
 sudo flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
@@ -36,6 +36,11 @@ rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/snd.conf /etc/modprobe.d/  # Bug fix for speaker control on Lenovo Yoga 9
+if [ ! -d /usr/share/gnome-shell/theme/Yaru-blue ]; then
+    sudo mkdir /usr/share/gnome-shell/theme
+    sudo mkdir /usr/share/gnome-shell/theme/Yaru-blue
+    sudo cp $HOME/Documents/Linux-Utilities/config/Themes/Yaru-blue-Ubuntu2404.css /usr/share/gnome-shell/theme/Yaru-blue/gnome-shell.css
+fi
 
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting:
 # The themes here need to be installed for these commands to work
