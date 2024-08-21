@@ -26,7 +26,7 @@ $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 
 # Install some applications:
-sudo zypper -n install geary flameshot retext inkscape  # openSUSE native repo, multi install
+sudo zypper -n install neofetch geary flameshot retext inkscape  # openSUSE native repo, multi install
 sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim  # Flathub as repo, multi install
 sudo flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
 
@@ -40,6 +40,12 @@ if [ ! -d /usr/share/gnome-shell/theme/Yaru-blue ]; then
     sudo mkdir /usr/share/gnome-shell/theme
     sudo mkdir /usr/share/gnome-shell/theme/Yaru-blue
     sudo cp $HOME/Documents/Linux-Utilities/config/Themes/Yaru-blue-Ubuntu2404.css /usr/share/gnome-shell/theme/Yaru-blue/gnome-shell.css
+fi
+if [ ! -f $HOME/.vimrc ]; then
+    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME
+fi
+if [ ! -f $HOME/.bashrc ]; then
+    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.bashrc $HOME
 fi
 
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting:

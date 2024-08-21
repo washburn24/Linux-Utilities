@@ -48,6 +48,12 @@ if [ ! -d /usr/share/gnome-shell/theme/Yaru-blue ]; then
     sudo mkdir /usr/share/gnome-shell/theme/Yaru-blue
     sudo cp $HOME/Documents/Linux-Utilities/config/Themes/Yaru-blue-Ubuntu2404.css /usr/share/gnome-shell/theme/Yaru-blue/gnome-shell.css
 fi
+if [ ! -f $HOME/.vimrc ]; then
+    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME
+fi
+if [ ! -f $HOME/.bashrc ]; then
+    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.bashrc $HOME
+fi
 
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting:
 # The themes here need to be installed for these commands to work

@@ -30,6 +30,12 @@ rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/snd.conf /etc/modprobe.d/  # Bug fix for speaker control on Lenovo Yoga 9
+if [ ! -f $HOME/.vimrc ]; then
+    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME
+fi
+if [ ! -f $HOME/.bashrc ]; then
+    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.bashrc $HOME
+fi
 
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting:
 # The themes here need to be installed for these commands to work
