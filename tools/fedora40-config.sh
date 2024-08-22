@@ -26,9 +26,9 @@ $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 
 # Install some applications (needs to be checked for native vs Flatpak):
-sudo dnf -y install geary tlp tlp-rdw flamshot  # TLP are battery life optimization tools
+sudo dnf -y install geary flameshot  # TLP are battery life optimization tools
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
-flatpak -y install flathub zoom spotify inkscape diffuse retext tlpui org.vim.Vim  # Flathub as repo, multi install
+flatpak -y install flathub zoom spotify inkscape diffuse retext org.vim.Vim  # Flathub as repo, multi install
 flatpak -y install fedora org.gnome.Mines org.gnome.Sudoku org.gnome.Chess org.gnome.Aisleriot  # Fedora as repo, multi install
 
 # Make some custom changes that are only relevant to me:
