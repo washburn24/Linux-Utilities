@@ -25,20 +25,14 @@ flatpak install -y org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -n WhiteSurAlt
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 
-# Install some applications (needs to be check for native vs Flatpak):
-if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
-sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
-rm -f google-chrome-stable_current_x86_64.rpm
+# Install some applications (needs to be checked for native vs Flatpak):
 sudo dnf -y install geary tlp tlp-rdw flamshot  # TLP are battery life optimization tools
 flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
 flatpak -y install flathub zoom spotify inkscape diffuse retext tlpui org.vim.Vim  # Flathub as repo, multi install
 flatpak -y install fedora org.gnome.Mines org.gnome.Sudoku org.gnome.Chess org.gnome.Aisleriot  # Fedora as repo, multi install
 
 # Make some custom changes that are only relevant to me:
-cp $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz $HOME/.icons
-tar -C $HOME/.icons -xf $HOME/.icons/WhiteSurCustom.tar.xz
+tar -C $HOME/.icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz
 rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
@@ -62,23 +56,28 @@ gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
 gsettings set org.gnome.shell.extensions.user-theme name 'MacLight'
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close:appmenu'
-gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 
 # Controlling Just Perfection from the command line (move clock and notifications to the right):
-gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position 1
-gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position-offset 6
-gsettings set org.gnome.shell.extensions.just-perfection notification-banner-position 2
+dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position 1
+dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 7
+dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
 
 # Gnome general settings adjustments
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll 'false'
 gsettings set org.gnome.desktop.interface clock-format '12h'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
-gsettings set org.gnome.control-center window-state 'uint32 0'
 
-# Install flameshot screen capture software and set PrintScreen shortcut to .sh to work around permissions bug
+# Configure flameshot screen capture software and set PrintScreen shortcut to .sh to work around permissions bug
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name Flameshot
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command ~/Documents/Linux-Utilities/tools/flameshot-workaround.sh
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding Print
 flatpak -y update  # Possibly redundant but makes Flatpaks look for the new icon theme
+
+# Install Google Chrome:
+if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
+sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
+rm -f google-chrome-stable_current_x86_64.rpm

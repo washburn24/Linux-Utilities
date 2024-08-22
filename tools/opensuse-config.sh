@@ -26,7 +26,7 @@ $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 
 # Install some applications:
-sudo zypper -n install neofetch geary flameshot retext inkscape  # openSUSE native repo, multi install
+sudo zypper -n install neofetch geary flameshot retext inkscape gnome-tweaks  # openSUSE native repo, multi install
 sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim  # Flathub as repo, multi install
 sudo flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
 
@@ -55,19 +55,17 @@ gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
 gsettings set org.gnome.shell.extensions.user-theme name 'MacLight'
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close:appmenu'
-gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 
 # Controlling Just Perfection from the command line (move clock and notifications to the right):
-gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position 1
-gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position-offset 6
-gsettings set org.gnome.shell.extensions.just-perfection notification-banner-position 2
+dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position 1
+dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 7
+dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
 
 # Gnome general settings adjustments
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll 'false'
 gsettings set org.gnome.desktop.interface clock-format '12h'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
-gsettings set org.gnome.control-center window-state 'uint32 0'
 
 # Configure flameshot screen capture software and set PrintScreen shortcut to .sh to work around permissions bug
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
@@ -77,8 +75,8 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 sudo flatpak -y update  # Possibly redundant but makes Flatpaks look for the new icon theme
 
 # Install Google Chrome:
-#if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
-#    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-#fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
-#sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
-#rm -f google-chrome-stable_current_x86_64.rpm
+if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
+sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
+rm -f google-chrome-stable_current_x86_64.rpm
