@@ -10,5 +10,5 @@ tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
 mv -f $HOME/.icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/Icons
 
 # Copy Vim and Bash configuration files to backup and synced location
-rsync -a --ignore-existing $HOME/.vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles
-rsync -a --ignore-existing $HOME/.bashrc $HOME/Documents/Linux-Utilities/config/Dotfiles
+rsync -a --ignore-existing $HOME/.vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/
+rsync -a --ignore-existing $HOME/.bashrc $HOME/Documents/Linux-Utilities/config/Dotfiles/
