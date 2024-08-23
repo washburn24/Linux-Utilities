@@ -79,5 +79,5 @@ flatpak -y update  # Possibly redundant but makes Flatpaks look for the new icon
 if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
-sudo dnf -y install google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
+sudo dnf -y install ./google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
 rm -f google-chrome-stable_current_x86_64.rpm
