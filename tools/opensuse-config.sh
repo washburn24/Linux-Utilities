@@ -26,7 +26,7 @@ $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 
 # Install some applications:
-sudo zypper -n install neofetch geary flameshot retext inkscape gnome-tweaks  # openSUSE native repo, multi install
+sudo zypper -n install neofetch geary flameshot inkscape gnome-tweaks  # openSUSE native repo, multi install
 sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim  # Flathub as repo, multi install
 sudo flatpak -y install flathub io.github.shiftey.Desktop  # Github Desktop, syntax found via Flathub's web install
 

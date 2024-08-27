@@ -42,9 +42,9 @@ gsettings set org.gnome.desktop.wm.preferences button-layout 'close:appmenu'
 
 Command line controls of Just Perfection (this snippet moves the clock and notification to the right):
 ```
-gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position 1
-gsettings set org.gnome.shell.extensions.just-perfection clock-menu-position-offset 6
-gsettings set org.gnome.shell.extensions.just-perfection notification-banner-position 2
+dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position 1
+dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 6
+dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
 ```
 Install some applications in different ways, this list can be as long as your requirements:
 ```
