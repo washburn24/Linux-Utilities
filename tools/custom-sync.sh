@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Grab updated icon set from Github, integrate to custom folder, build tarball
+# Grab updated icon set from Github, integrate to custom folder, rebuild tarball
 git -C $HOME/Documents/Software/Git/WhiteSur-icon-theme pull origin master
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -n WhiteSurAlt
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean

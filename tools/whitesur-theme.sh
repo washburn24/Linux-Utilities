@@ -10,8 +10,9 @@ fi
 
 # Install and configure
 mkdir $HOME/.themes
-$HOME/Documents/Software/Git/Whitesur-gtk-theme/install.sh
-$HOME/Documents/Software/Git/Whitesur-gtk-theme/install.sh -l -c Light
-$HOME/Documents/Software/Git/Whitesur-gtk-theme/tweaks.sh -F -c Light
+$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
+$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh -l -c Light
+$HOME/Documents/Software/Git/WhiteSur-gtk-theme/tweaks.sh -F -c Light
+$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
-sudo $HOME/Documents/Software/Git/Whitsur-gtk-theme/tweaks.sh -g -b $HOME/Pictures/Toscana.jpg
+sudo $HOME/Documents/Software/Git/WhiteSur-gtk-theme/tweaks.sh -g -b $HOME/Pictures/Toscana.jpg
