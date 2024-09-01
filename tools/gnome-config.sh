@@ -14,7 +14,9 @@ elif has_command zypper; then
     echo "zypper package manager found, installing apps for openSUSE"
     sudo zypper -n install git neofetch geary flameshot inkscape gnome-tweaks  # openSUSE native repo
     sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim io.github.shiftey.Desktop
-else echo "Warning: Linux distribution not detected for installation."; exit 1
+else
+    echo "Warning: Linux distribution not detected for installation."; exit 1
+fi
 
 # Clone some GitHub repos...
 if [ ! -d $HOME/Documents/Software/Git/WhiteSur-icon-theme ]; then
@@ -32,6 +34,8 @@ if [ ! -d $HOME/Documents/Linux-Utilities ]; then
 else
     git -C $HOME/Documents/Linux-Utilities pull origin main
 fi
+
+command || exit 1
 
 # Install some gtk and icon themes...
 mkdir $HOME/.icons $HOME/.themes
