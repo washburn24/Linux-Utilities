@@ -1,21 +1,33 @@
 #!/usr/bin/env bash
 
-# Check command availability
+# Function to check for command availability
 has_command() {
     command -v "$1" &> /dev/null
 }
 
-# Install some applications...
+# Install some native applications...
 if has_command apt; then
     echo "apt package manager found, installing apps for Debian/Ubuntu..."
+    sudo apt -y install git gnome-tweaks flatpak gnome-software gnome-software-plugin-flatpak
+    sudo apt -y install neofetch gnome-contacts gnome-calendar geary flameshot  # Debian native repo
 elif has_command dnf; then
     echo "dnf package manager found, installing apps for Fedora..."
+    sudo dnf -y install git gnome-tweaks geary flameshot  # Fedora native repo
 elif has_command zypper; then
     echo "zypper package manager found, installing apps for openSUSE"
     sudo zypper -n install git neofetch geary flameshot inkscape gnome-tweaks  # openSUSE native repo
-    sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim io.github.shiftey.Desktop
 else
     echo "Warning: Linux distribution not detected for installation."; exit 1
+fi
+
+# Install some flatpak applications (openSUSE prefers sudo, Debian/Ubuntu/Fedora don't care)...
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+if has_command zypper; then
+    sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim org.gnome.Boxes com.discordapp.Discord
+    sudo flatpak -y install flathub io.github.shiftey.Desktop org.gnome.gitlab.somas.Apostrophe
+else
+    flatpak -y install flathub io.github.shiftey.Desktop org.gnome.gitlab.somas.Apostrophe
+    flatpak -y install flathub zoom spotify inkscape diffuse org.vim.Vim com.discordapp.Discord
 fi
 
 # Clone some GitHub repos...
@@ -34,8 +46,6 @@ if [ ! -d $HOME/Documents/Linux-Utilities ]; then
 else
     git -C $HOME/Documents/Linux-Utilities pull origin main
 fi
-
-command || exit 1
 
 # Install some gtk and icon themes...
 mkdir $HOME/.icons $HOME/.themes
@@ -61,11 +71,15 @@ tar -C $HOME/.icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCus
 rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
-if [ ! -f $HOME/.vimrc ]; then
+if [ ! -f $HOME/.vimrc ]; then  # Copy new dotfiles if they don't exist, if they exist and are newer update the archive
     cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME
+else
+    rsync -a $HOME/.vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/
 fi
 if [ ! -f $HOME/.bashrc ]; then
     cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.bashrc $HOME
+else
+    rsync -a $HOME/.bashrc $HOME/Documents/Linux-Utilities/config/Dotfiles/
 fi
 
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting...
@@ -91,9 +105,21 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command ~/Documents/Linux-Utilities/tools/flameshot-workaround.sh
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding Print
 
-# Install Google Chrome:
-#if [ ! -f google-chrome-stable_current_x86_64.rpm ]; then
-#    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-#fi  # Checking for file existence helps with script debug but isn't very useful in real use cases
-#sudo zypper -n install ./google-chrome-stable_current_x86_64.rpm  # Grab Google Chrome's latest and install locally
-#rm -f google-chrome-stable_current_x86_64.rpm
+# Install Google Chrome delete any old versions hanging around...
+if [ -f google-chrome-stable_current_x86_64.rpm ]; then
+    rm -f google-chrome-stable_current_x86_64.rpm
+fi
+if [ -f google-chrome-stable_current_amd64.deb ]; then
+    rm -f google-chrome-stable_current_amd64.deb
+fi
+if has_command zypper; then
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+    sudo zypper -n install ./google-chrome-stable_current_x86_64.rpm
+elif has_command dnf; then
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+    sudo dnf -y install ./google-chrome-stable_current_x86_64.rpm
+elif has_command apt; then
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo apt -y install ./google-chrome-stable_current_amd64.deb
+fi
+rm -f google-chrome-stable_current_*

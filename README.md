@@ -2,7 +2,7 @@
  Some utilities for Linux/Gnome to automate the path between clean install and useful system.
 
 ### Overview
-These tools are designed to make clean installs of Linux/Gnome enviroments automated including installing applications, cloning Github repos, installing themes and automatically controlling them via Tweaks and Themes.  There is also some custom configuration that can be easily automatically controlled.  My system is skinned to look like Mac OS with default Adwaita window controls, but any theme/icon combo would work in a similar way.  Note that installing themes programatically requires a reload of Gnome Shell (a logout on Wayland) and makes them non-User Installed, which I don't really like.  Distros that don't have Flatpak preinstalled (like Debian) also require configuring before the Flatpak portions of this scripting will work.  So, at current I'm manually configuring a minimal set of commands that really should be done from the command line (like the below) but can't be unless you're on an older WM:
+These tools are designed to make clean installs of Linux/Gnome environments automated including installing applications, cloning Github repos, installing themes and automatically controlling them via various Gnome settings adjustments and Tweaks.  Think of them as examples, but they are fairly complete for my own setup.  The motivation here is to make distro-hopping automatic and seamless, so there is also some custom configuration that can be easily automatically controlled.  My system is skinned to look like Mac OS, but any theme/icon combo would work in a similar way.  Note that installing extensions programatically requires a reload of Gnome Shell (a logout on Wayland) and makes them non-User Installed, which I don't really like.  So, at current I'm manually configuring a minimal set of commands that really should be done from the command line (like the below) but can't be unless you're on an older WM.  That is we manually install Extension Manager then User Themes and Just Perfection extensions.  After that, the installation script handles everything else possibly requiring a logout/login upon completion.
 
 ```
 flatpak -y install flathub ExtensionManager
@@ -30,7 +30,6 @@ gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll 'false'
 gsettings set org.gnome.desktop.interface clock-format '12h'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
-gsettings set org.gnome.desktop.control-center window-state 'uint32 0'
 ```
 Command line controls of Gnome Tweaks:
 ```
@@ -58,5 +57,8 @@ Any custom configuration or known bug fixes for specific hardware:
 tar -C $HOME/.icons -xvf $HOME/.icons/WhiteSurCustom.tar.xz
 rsync -a -v --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/snd.conf /etc/modprobe.d/
+if [ ! -f $HOME/.vimrc ]; then
+   cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME
+fi
 ```
-These examples are geared to Fedora for syntax and clean install toolset but other distros would be similar (Debian would use apt as the package manager instead of dnf, Ubuntu would do that as well as having sandboxed apps default to Snap without explicitly installed Flatpak support, etc).  A functional bash shell example for Fedora Workstation 40, Ubuntu 24.04 LTS, and openSUSE Tumbleweed (rolling release) are in the /tools subdirectory, everything they need is self contained in public git repos including this one, which it will clone automatically.  They aren't perfect but are a good start.
+These examples are geared to Fedora for syntax and clean install toolset but other distros would be similar with different default apps and package managers.  A functional bash shell example supporting Fedora, Ubuntu, and openSUSE is in the /tools subdirectory.  Everything they need is self contained in public git repos including this one, which it will clone automatically.  They aren't perfect but are a good start.  Note that this tool now automates enabling Flatpak on distros that don't ship with support, so if you don't want that you'll need remove or modify it to support Snaps.
