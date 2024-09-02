@@ -20,14 +20,14 @@ else
     echo "Warning: Linux distribution not detected for installation."; exit 1
 fi
 
-# Install some flatpak applications (openSUSE prefers sudo, Debian/Ubuntu/Fedora don't care)...
+# Install some flatpak applications (note explicit sudo on these)...
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak -y install flathub io.github.shiftey.Desktop org.gnome.gitlab.somas.Apostrophe
+sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim org.gnome.Boxes com.discordapp.Discord
 if has_command zypper; then
-    sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim org.gnome.Boxes com.discordapp.Discord
-    sudo flatpak -y install flathub io.github.shiftey.Desktop org.gnome.gitlab.somas.Apostrophe
+    sudo flatpak -y install flathub org.gnome.Boxes
 else
-    flatpak -y install flathub io.github.shiftey.Desktop org.gnome.gitlab.somas.Apostrophe
-    flatpak -y install flathub zoom spotify inkscape diffuse org.vim.Vim com.discordapp.Discord
+    sudo flatpak -y install flathub inkscape
 fi
 
 # Clone some GitHub repos...
@@ -89,6 +89,7 @@ fi
 # Syntax for gsettings can be deciphered using 'dconf watch /' while monitoring settings adjustments in GUI tools
 gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
 dconf write /org/gnome/shell/extensions/user-theme/name 'WhiteSur-Light-solid'
+gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light-solid'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
 
 # Controlling Just Perfection from the command line (move clock and notifications to the right)...
