@@ -88,7 +88,7 @@ fi
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting...
 # Syntax for gsettings can be deciphered using 'dconf watch /' while monitoring settings adjustments in GUI tools
 gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
-gsettings set org.gnome.shell.extensions.user-theme name 'MacLight'
+dconf write /org/gnome/shell/extensions/user-theme/name 'WhiteSur-Light-solid'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
 
 # Controlling Just Perfection from the command line (move clock and notifications to the right)...
