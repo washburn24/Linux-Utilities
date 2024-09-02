@@ -58,6 +58,9 @@ $HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh -l -c Light
 $HOME/Documents/Software/Git/WhiteSur-gtk-theme/tweaks.sh -F -c Light
 $HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
+if [ ! -f $HOME/Pictures/Toscana.jpg ] ; then
+    cp $HOME/Documents/Linux-Utilities/config/Pictures/Toscana.jpg $HOME/Pictures/
+fi
 sudo $HOME/Documents/Software/Git/WhiteSur-gtk-theme/tweaks.sh -g -b $HOME/Pictures/Toscana.jpg
 
 # Make some custom changes that are only relevant to me...
@@ -68,7 +71,7 @@ if [ ! -d /usr/share/gnome-shell/theme/Yaru-blue ]; then
 fi
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/alsa-base.conf /etc/modprobe.d/  # Bug fix for audio on Lenovo Yoga 9
 tar -C $HOME/.icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz
-rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/
+rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/  # Sync only new icons to not overwrite custom changes
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
 if [ ! -f $HOME/.vimrc ]; then  # Copy new dotfiles if they don't exist, if they exist and are newer update the archive
