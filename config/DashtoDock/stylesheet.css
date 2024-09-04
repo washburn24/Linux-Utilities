@@ -1081,7 +1081,7 @@
     padding-left: 0; }
   #dashtodockContainer.right.shrink #dash .dash-item-container {
     /* Disable all margins defined upstream, we handle them here */
-    margin: 2px 0; }
+    margin: 3px 0; }
     #dashtodockContainer.right.shrink #dash .dash-item-container > * {
       margin: 0; }
     #dashtodockContainer.right.shrink #dash .dash-item-container:first-child {
@@ -1475,4 +1475,8 @@
   padding-bottom: 0px;
   padding-right: 4px;
   padding-left: 3px;
-  border-radius: 10px; }
+  border-radius: 2px; }
+
+/* This is probably the correct way to handle icon borders in the dock */
+#dashtodockContainer.right.shrink #dash .dash-item-container {
+  margin: 0px 0; }
