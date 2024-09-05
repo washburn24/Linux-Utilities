@@ -12,3 +12,4 @@ mv -f $HOME/.icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/
 # Copy Vim and Bash configuration files to backup and synced location if they're newer
 rsync -a $HOME/.vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/
 rsync -a $HOME/.bashrc $HOME/Documents/Linux-Utilities/config/Dotfiles/
+rsync -a $HOME/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/sylesheet.css $HOME/Documents/Linux-Utilities/config/DashtoDock/

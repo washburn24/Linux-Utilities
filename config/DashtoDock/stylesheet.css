@@ -1067,7 +1067,7 @@
     margin: 0;
     margin-right: 4px;
     padding: 0;
-    border-radius: 18px;
+    border-radius: 10px;
     spacing: 2px; }
   #dashtodockContainer.right.shrink #dash .dash-separator {
     background-color: rgba(255, 255, 255, 0.1);
@@ -1081,7 +1081,7 @@
     padding-left: 0; }
   #dashtodockContainer.right.shrink #dash .dash-item-container {
     /* Disable all margins defined upstream, we handle them here */
-    margin: 3px 0; }
+    margin: 2px 0; }
     #dashtodockContainer.right.shrink #dash .dash-item-container > * {
       margin: 0; }
     #dashtodockContainer.right.shrink #dash .dash-item-container:first-child {
@@ -1368,9 +1368,12 @@
      *   -progress-bar-track-line-width: 1
      *   -progress-bar-background: 204, 204, 204, 1.0
      *   -progress-bar-border: 230, 230, 230, 1.0
+     *   -progress-bar-height-factor: (0.20) 20% of the icon size
      *   -progress-bar-line-width: 1
      *   -progress-bar-top-offset: undefined
      *   -progress-bar-valign: 1.0
+     *   -progress-bar-horizontal-padding: 0.05 (5% of icon size)
+     *   -progress-bar-vertical-padding: 0.05 (5% of icon size)
      */
   -progress-bar-track-background: rgba(0, 0, 0, 0.45);
   -progress-bar-track-border: rgba(0, 0, 0, 0.7);
@@ -1379,8 +1382,13 @@
 
 #overview .progress-bar,
 .apps-scroll-view .progress-bar {
+  -progress-bar-height-factor: 0.15;
   -progress-bar-top-offset: 0;
-  -progress-bar-valign: 0.8; }
+  -progress-bar-valign: 0.95; }
+
+#overview .grid-search-results .overview-tile .progress-bar,
+#overview .app-folder-dialog .progress-bar {
+  -progress-bar-height-factor: 0.13; }
 
 #dashtodockContainer.top #dash .placeholder,
 #dashtodockContainer.bottom #dash .placeholder {
@@ -1469,14 +1477,17 @@
   background-size: contain; }
 
 
-/* Just blatantly override the above icon spacing settings until I can find a more elegant fix */
-#dashtodockContainer .overview-icon {
+/* Reduce the border around individual icons to further shrink the dock (on right, shrink enabled) */
+#dashtodockContainer.right.shrink #dash .overview-icon {
   padding-top: 0px;
   padding-bottom: 0px;
-  padding-right: 4px;
+  padding-right: 5px;
   padding-left: 3px;
-  border-radius: 2px; }
-
-/* This is probably the correct way to handle icon borders in the dock */
+  border-radius: 5px; }
 #dashtodockContainer.right.shrink #dash .dash-item-container {
   margin: 0px 0; }
+
+/* Dock overall border and corner control paramters */
+#dashtodockContainer.right.shrink #dash .dash-background {
+  margin-right: 4px;
+  border-radius: 10px; }
