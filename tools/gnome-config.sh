@@ -5,23 +5,23 @@ has_command() {
     command -v "$1" &> /dev/null
 }
 
-# Install some native applications...
+# Install some native applications by distro...
 if has_command apt; then
     echo "apt package manager found, installing apps for Debian/Ubuntu..."
     sudo apt -y install git gnome-tweaks flatpak gnome-software gnome-software-plugin-flatpak
-    sudo apt -y install neofetch gnome-contacts gnome-calendar geary flameshot  # Debian native repo
+    sudo apt -y install neofetch gnome-contacts gnome-calendar geary flameshot   # Debian native repo
 elif has_command dnf; then
     echo "dnf package manager found, installing apps for Fedora..."
-    sudo dnf -y install git gnome-tweaks geary flameshot  # Fedora native repo
+    sudo dnf -y install git gnome-tweaks geary flameshot                         # Fedora native repo
 elif has_command zypper; then
     echo "zypper package manager found, installing apps for openSUSE"
-    sudo zypper -n install git neofetch geary flameshot inkscape gnome-tweaks  # openSUSE native repo
+    sudo zypper -n install git neofetch geary flameshot inkscape gnome-tweaks    # openSUSE native repo
 else
-    echo "Warning: Linux distribution not detected for installation."; exit 1
+    echo "Warning: Linux distribution not detected for installation. Exiting to avoid harm."; exit 1
 fi
 
-# Install some flatpak applications (note explicit sudo on these)...
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+# Install some flatpak applications...
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak -y install flathub io.github.shiftey.Desktop org.gnome.gitlab.somas.Apostrophe
 sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim org.gnome.Boxes com.discordapp.Discord
 if has_command zypper; then
