@@ -14,8 +14,11 @@ elif has_command dnf; then
     echo "dnf package manager found, installing apps for Fedora..."
     sudo dnf -y install git gnome-tweaks geary flameshot                         # Fedora native repo
 elif has_command zypper; then
-    echo "zypper package manager found, installing apps for openSUSE"
+    echo "zypper package manager found, installing apps for openSUSE..."
     sudo zypper -n install git neofetch geary flameshot inkscape gnome-tweaks    # openSUSE native repo
+elif has_command pacman; then
+    echo "pacman package manager found, installing apps for Manjaro..."
+    sudo pacman -Syu --noconfirm flameshot                                       # Manjaro native repo
 else
     echo "Warning: Linux distribution not detected for installation. Exiting to avoid harm."; exit 1
 fi
@@ -109,7 +112,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command ~/Documents/Linux-Utilities/tools/flameshot-workaround.sh
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding Print
 
-# Install Google Chrome delete any old versions hanging around...
+# Install Google Chrome but delete any old versions hanging around...
 if [ -f google-chrome-stable_current_x86_64.rpm ]; then
     rm -f google-chrome-stable_current_x86_64.rpm
 fi
@@ -125,5 +128,7 @@ elif has_command dnf; then
 elif has_command apt; then
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     sudo apt -y install ./google-chrome-stable_current_amd64.deb
+elif has_command pamac; then
+    sudo pamac build --no-confirm google-chrome
 fi
 rm -f google-chrome-stable_current_*
