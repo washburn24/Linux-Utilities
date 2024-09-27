@@ -12,13 +12,13 @@ if has_command apt; then
     sudo apt -y install neofetch gnome-contacts gnome-calendar geary flameshot   # Debian native repo
 elif has_command dnf; then
     echo "dnf package manager found, installing apps for Fedora..."
-    sudo dnf -y install git gnome-tweaks geary flameshot                         # Fedora native repo
+    sudo dnf -y install git gnome-tweaks geary flameshot diffuse                 # Fedora native repo
 elif has_command zypper; then
     echo "zypper package manager found, installing apps for openSUSE..."
     sudo zypper -n install git neofetch geary flameshot inkscape gnome-tweaks    # openSUSE native repo
 elif has_command pacman; then
     echo "pacman package manager found, installing apps for Manjaro..."
-    sudo pacman -Syu --noconfirm flameshot                                       # Manjaro native repo
+    sudo pacman -Syu --noconfirm geary flameshot                                 # Manjaro native repo
 else
     echo "Warning: Linux distribution not detected for installation. Exiting to avoid harm."; exit 1
 fi
@@ -26,12 +26,7 @@ fi
 # Install some flatpak applications...
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak -y install flathub io.github.shiftey.Desktop org.gnome.gitlab.somas.Apostrophe
-sudo flatpak -y install flathub zoom spotify diffuse org.vim.Vim org.gnome.Boxes com.discordapp.Discord
-if has_command zypper; then
-    sudo flatpak -y install flathub org.gnome.Boxes
-else
-    sudo flatpak -y install flathub inkscape
-fi
+sudo flatpak -y install flathub zoom spotify org.vim.Vim com.discordapp.Discord
 
 # Clone some GitHub repos...
 if [ ! -d $HOME/Documents/Software/Git/WhiteSur-icon-theme ]; then
@@ -61,10 +56,6 @@ $HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh -l -c Light
 $HOME/Documents/Software/Git/WhiteSur-gtk-theme/tweaks.sh -F -c Light
 $HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
-if [ ! -f $HOME/Pictures/Toscana.jpg ] ; then
-    cp $HOME/Documents/Linux-Utilities/config/Pictures/Toscana.jpg $HOME/Pictures/
-fi
-sudo $HOME/Documents/Software/Git/WhiteSur-gtk-theme/tweaks.sh -g -b $HOME/Pictures/Toscana.jpg
 
 # Make some custom changes that are only relevant to me...
 if [ ! -d /usr/share/gnome-shell/theme/Yaru-blue ]; then
@@ -113,11 +104,8 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding Print
 
 # Install Google Chrome but delete any old versions hanging around...
-if [ -f google-chrome-stable_current_x86_64.rpm ]; then
-    rm -f google-chrome-stable_current_x86_64.rpm
-fi
-if [ -f google-chrome-stable_current_amd64.deb ]; then
-    rm -f google-chrome-stable_current_amd64.deb
+if [ -f google-chrome-stable_current_x86_64.rpm ] || [ -f google-chrome-stable_current_amd64.deb ]; then
+    rm -f google-chrome-stable_current_*
 fi
 if has_command zypper; then
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
