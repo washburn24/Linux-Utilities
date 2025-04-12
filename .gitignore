@@ -2,3 +2,6 @@ security/*
 snap/*
 webapps/*
 CleanInstallScriptingNotes.txt
+.DS_Store
+config/.DS_Store
+tools/.DS_Store
