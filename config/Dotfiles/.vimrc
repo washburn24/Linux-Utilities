@@ -13,7 +13,7 @@ if has('gui_running')
 else
     colorscheme default
 endif
-set lines=80 columns=160
+set lines=65 columns=140
 
 " Fix text behavior and kill all extra files to minimize clutter
 set ignorecase smartcase
