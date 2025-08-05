@@ -52,8 +52,8 @@ $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n W
 
 # Install and configure WhiteSur theme for Mac style controls...
 $HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
-$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh -l -c Light
-$HOME/Documents/Software/Git/WhiteSur-gtk-theme/tweaks.sh -F -c Light
+$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh -l -c light -o solid
+$HOME/Documents/Software/Git/WhiteSur-gtk-theme/tweaks.sh -F -c light
 $HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
 
