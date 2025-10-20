@@ -3,7 +3,7 @@
 /* Controls the top bar color, #ebebeb is very light gray, #afcfef is blue-ish gray to match the translucent bar on my Mac */
 #panel {
   background-color: black;
-  height: 2.2em;
+  height: 2.5em;
   box-shadow: inset 0 0px 0 0 black; }
 
 /* Controls the color of the panel system icons and their spacing */
@@ -16,7 +16,7 @@
 .clock-display-box .clock {
   font-weight: bold;
   padding-left: 1px;
-  padding-right: 10px; }
+  padding-right: 15px; }
 
 /* Controls the padding/spacing around the Show Apps launcher in the dock */
 .dash-item-container .show-apps .overview-icon {
@@ -24,14 +24,14 @@
 
 /* Controls the padding/spacing around application icons in the dock*/
 .dash-item-container .app-well-app .overview-icon, .dash-item-container .grid-search-result .overview-icon {
-  padding: 0px;
+  padding: 4px;
   border-radius: 40px; }
 
 /* Controls the color of the workspaces button (pre Ubuntu 23.10 this was "Activities" hence the naming) */
 #panel .panel-button#panelActivities .workspace-dot {
   background-color: white; }
 
-/* Mac doesn't contrast mouse hover over system icons as they're not grouped, so this does that with darker gray for light top bars */
+/* Mac doesn't contrast mouse hover over system icons as they're not grouped, so this does that with darker dark on hover */
 #panel .panel-button:hover {
   background-color: rgba(12, 12, 12, 0.15);
   box-shadow: inset 0 0 0 100px rgba(12, 12, 12, 0.15); }
