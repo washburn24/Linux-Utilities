@@ -46,12 +46,13 @@ else
     git -C $HOME/Documents/Linux-Utilities pull origin main
 fi
 
-# Install some gtk and icon themes...
+# Install some gtk, icon, and Vim themes...
 mkdir $HOME/.icons $HOME/.themes
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -n WhiteSurAlt
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 tar -C $HOME/.icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz
 rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/  # Sync only new icons to not overwrite custom changes
+sudo cp $HOME/Documents/Linux-Utilities/config/Themes/codedark.vim /usr/share/vim/vim91/colors/
 
 # Install and configure WhiteSur theme for Mac style controls...
 #$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
