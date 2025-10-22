@@ -8,7 +8,7 @@ has_command() {
 # Install some native applications by distro...
 if has_command apt; then
     echo "apt package manager found, installing apps for Debian/Ubuntu..."
-    sudo apt -y install git gnome-tweaks flatpak gnome-software gnome-software-plugin-flatpak
+    sudo apt -y install git rsync gnome-tweaks flatpak gnome-software gnome-software-plugin-flatpak
     sudo apt -y install fastfetch gnome-contacts gnome-calendar geary flameshot   # Debian native repo
 elif has_command dnf; then
     echo "dnf package manager found, installing apps for Fedora..."
