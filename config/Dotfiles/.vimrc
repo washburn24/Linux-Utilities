@@ -8,7 +8,7 @@ syntax on
 
 if has('gui_running')
     set background=dark
-    colorscheme koehler
+    colorscheme codedark
     set guifont=DejaVu\ Sans\ Mono\ Bold\ 11
 else
     colorscheme default

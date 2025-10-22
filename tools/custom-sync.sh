@@ -10,8 +10,8 @@ tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
 mv -f $HOME/.icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/Icons
 
 # Grab updated theme from Github and re-install
-git -C $HOME/Documents/Software/Git/WhiteSur-gtk-theme pull origin master
-$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
+#git -C $HOME/Documents/Software/Git/WhiteSur-gtk-theme pull origin master
+#$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
 
 # Copy Vim and Bash configuration files to backup and synced location if they're newer
 rsync -a $HOME/.vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/
