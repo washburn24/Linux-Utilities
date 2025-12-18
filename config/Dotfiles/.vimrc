@@ -9,7 +9,7 @@ syntax on
 if has('gui_running')
     set background=dark
     colorscheme codedark
-    set guifont=DejaVu\ Sans\ Mono\ Bold\ 11
+    set guifont=DejaVu\ Sans\ Mono\ 11
 else
     colorscheme default
 endif
