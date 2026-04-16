@@ -3,7 +3,7 @@ has_command() {
     command -v "$1" &> /dev/null
 }
 
-# Change sudo timeout so the whole script runs
+# Change sudo timeout so the whole script runs on reasonable internet connections
 echo "Defaults timestamp_timeout=60" | sudo tee /etc/sudoers.d/timeout_settings
 sudo chmod 0440 /etc/sudoers.d/timeout_settings
 
@@ -11,12 +11,12 @@ sudo chmod 0440 /etc/sudoers.d/timeout_settings
 if has_command pacman; then
     echo "pacman package manager found, installing apps for Arch/CachyOS..."
     sudo pacman -Syu --noconfirm
-    sudo pacman -Ru --noconfirm alacritty meld micro vim
-    sudo pacman -Syu --noconfirm geary flameshot flatpak diffuse                  # Arch native repo
+    sudo pacman -Ru --noconfirm alacritty meld cachyos-micro-settings micro
+    sudo pacman -Syu --noconfirm geary flameshot flatpak diffuse gvim             # Arch native repo
     sudo pacman -Syu --noconfirm gnome-calendar gnome-contacts gnome-weather gnome-maps
     sudo pacman -Syu --noconfirm apostrophe inkscape adw-gtk-theme python-pip octopi
-    sudo pacman -Syu --noconfirm extension-manager github-desktop gvim
-    paru -Syu --noconfirm joplin-desktop google-chrome pycharm
+    sudo pacman -Syu --noconfirm github-desktop extension-manager
+    paru -Syu --noconfirm nautilus-open-in-ptyxis joplin-desktop google-chrome pycharm
 elif has_command apt; then
     echo "apt package manager found, installing apps for Debian/Ubuntu..."
     sudo apt -y install fastfetch gnome-contacts gnome-calendar geary flameshot   # Debian native repo
@@ -36,7 +36,7 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 if has_command pacman; then
     flatpak -y install flathub spotify
 else
-    flatpak -y install flathub io.github.shiftey.Desktop com.mattjakeman.ExtensionManager
+    flatpak -y install flathub spotify io.github.shiftey.Desktop com.mattjakeman.ExtensionManager
 fi
 sudo flatpak override --filesystem=xdg-config/gtk-3.0
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
@@ -76,6 +76,9 @@ gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll 'false'
 gsettings set org.gnome.desktop.interface clock-format '12h'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
+gsettings set org.gnome.desktop.interface enable-hot-corners 'false'
+gsettings set org.gnome.shell always-show-log-out true
+gsettings set org.gnome.mutter edge-tiling false
 
 # Command line control of gnome-tweaks; this sets icons, shell, legacy app themes, and title bar formatting...
 # Syntax for gsettings can be deciphered using 'dconf watch /' while monitoring settings adjustments in GUI tools
@@ -88,6 +91,7 @@ dconf write /org/gnome/desktop/interface/gtk-theme "'adw-gtk3'"
 dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position 1
 dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 10
 dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
+dconf write /org/gnome/shell/extensions/just-perfection/osd-position 3
 
 # Configure flameshot screen capture software and set PrintScreen shortcut to .sh to work around permissions bug...
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"

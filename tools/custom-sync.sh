@@ -9,6 +9,15 @@ cd $HOME/.icons
 tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
 mv -f $HOME/.icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/Icons
 
+# Grab updated extensions from Github and re-install
+git -C $HOME/Documents/Software/Git/dhruva pull origin main
+cd $HOME/Documents/Software/Git/dhruva
+make install
+git -C $HOME/Documents/Software/Git/rounded-corners pull origin main
+cd $HOME/Documents/Software/Git/rounded-corners
+chmod +x install.sh
+./install.sh
+
 # Grab updated theme from Github and re-install
 #git -C $HOME/Documents/Software/Git/WhiteSur-gtk-theme pull origin master
 #$HOME/Documents/Software/Git/WhiteSur-gtk-theme/install.sh
