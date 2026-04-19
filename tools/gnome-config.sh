@@ -7,16 +7,18 @@ has_command() {
 echo "Defaults timestamp_timeout=60" | sudo tee /etc/sudoers.d/timeout_settings
 sudo chmod 0440 /etc/sudoers.d/timeout_settings
 
-# Install some native applications by distro...
+## Install some native applications by distro...
 if has_command pacman; then
     echo "pacman package manager found, installing apps for Arch/CachyOS..."
     sudo pacman -Syu --noconfirm
-    sudo pacman -Ru --noconfirm alacritty meld cachyos-micro-settings micro
     sudo pacman -Syu --noconfirm geary flameshot octopi diffuse gvim paru git     # Arch native repo
     sudo pacman -Syu --noconfirm gnome-calendar gnome-contacts gnome-weather gnome-maps
     sudo pacman -Syu --noconfirm apostrophe inkscape adw-gtk-theme python-pip octopi
     sudo pacman -Syu --noconfirm github-desktop extension-manager spotify-launcher
     paru -Syu --noconfirm nautilus-open-in-ptyxis joplin-desktop google-chrome pycharm
+    if has_command meld; then
+        sudo pacman -Ru --noconfirm alacritty meld cachyos-micro-settings micro
+    fi
 elif has_command apt; then
     echo "apt package manager found, installing apps for Debian/Ubuntu..."
     sudo apt -y install fastfetch gnome-contacts gnome-calendar geary flameshot   # Debian native repo
@@ -37,40 +39,35 @@ if ! has_command pacman; then
     flatpak -y install flathub spotify io.github.shiftey.Desktop com.mattjakeman.ExtensionManager
     sudo flatpak override --filesystem=xdg-config/gtk-3.0
     sudo flatpak override --filesystem=xdg-config/gtk-4.0
+else
+    echo "No Flatpak installed for Arch/CachyOS, use 'pacman -S flatpak to override'"
 fi
 
 # Clone some GitHub repos...
-if [ ! -d $HOME/Documents/Software/Git/WhiteSur-icon-theme ]; then
-    git clone https://github.com/vinceliuice/WhiteSur-icon-theme $HOME/Documents/Software/Git/WhiteSur-icon-theme
-else
-    git -C $HOME/Documents/Software/Git/WhiteSur-icon-theme pull origin master
-fi
-if [ ! -d $HOME/Documents/Linux-Utilities ]; then
-    git clone https://github.com/washburn24/Linux-Utilities $HOME/Documents/Linux-Utilities
-else
-    git -C $HOME/Documents/Linux-Utilities pull origin main
-fi
-if [ ! -d $HOME/Documents/Software/Git/dhruva ]; then
-    git clone https://github.com/NarkAgni/dhruva $HOME/Documents/Software/Git
-else
-    git -C $HOME/Documents/Software/Git/dhruva pull origin main
-fi
-if [ ! -d $HOME/Documents/Software/Git/rounded-windows ]; then
-    git clone https://github.com/Nathanaelrc/rounded-windows $HOME/Documents/Software/Git
-else
-    git -C $HOME/Documents/Software/Git/rounded-windows pull origin master
-fi
+chmod +x github-sync.sh
+./github-sync.sh
 
 # Install some gtk, icon, and Vim themes...
-mkdir $HOME/.icons $HOME/.themes $HOME/.vim $HOME/.vim/colors
+if [[ ! -d $HOME/.icons/ || ! -d $HOME/.themes/ || ! -d $HOME/.vim/colors/ ]]; then
+    mkdir $HOME/.icons $HOME/.themes $HOME/.vim $HOME/.vim/colors
+fi
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -n WhiteSurAlt
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
 tar -C $HOME/.icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz
 rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/  # Sync only new icons to not overwrite custom changes
-sudo cp $HOME/Documents/Linux-Utilities/config/Themes/codedark.vim $HOME/.vim/colors/
+cd $HOME/.icons
+tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
+mv -f $HOME/.icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/Icons
+cp $HOME/Documents/Linux-Utilities/config/Themes/codedark.vim $HOME/.vim/colors/
+cd $HOME/Documents/Software/Git/dhruva
+make install
+cd $HOME/Documents/Software/Git/rounded-windows
+chmod +x install.sh
+./install.sh
+cd $HOME/Documents/Linux-Utilities/tools
 
 # Make some custom changes that are only relevant to me...
-#rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
+rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/alsa-base.conf /etc/modprobe.d/  # Bug fix for audio on Lenovo Yoga 9
 if [ ! -f $HOME/.vimrc ]; then  # Copy new dotfiles if they don't exist or if they exist and are newer update the archive

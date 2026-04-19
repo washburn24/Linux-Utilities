@@ -1,1 +1,0 @@
-These automation scripts are distribution/theme specific.  They have been tested and are functional as good working examples, but they won't be actively maintained for distro hopping...maintenance will be done in the distro agnostic 'gnome-config.sh' script.
