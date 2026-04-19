@@ -12,10 +12,10 @@ if has_command pacman; then
     echo "pacman package manager found, installing apps for Arch/CachyOS..."
     sudo pacman -Syu --noconfirm
     sudo pacman -Ru --noconfirm alacritty meld cachyos-micro-settings micro
-    sudo pacman -Syu --noconfirm geary flameshot flatpak diffuse gvim             # Arch native repo
+    sudo pacman -Syu --noconfirm geary flameshot octopi diffuse gvim paru git     # Arch native repo
     sudo pacman -Syu --noconfirm gnome-calendar gnome-contacts gnome-weather gnome-maps
     sudo pacman -Syu --noconfirm apostrophe inkscape adw-gtk-theme python-pip octopi
-    sudo pacman -Syu --noconfirm github-desktop extension-manager
+    sudo pacman -Syu --noconfirm github-desktop extension-manager spotify-launcher
     paru -Syu --noconfirm nautilus-open-in-ptyxis joplin-desktop google-chrome pycharm
 elif has_command apt; then
     echo "apt package manager found, installing apps for Debian/Ubuntu..."
@@ -31,15 +31,13 @@ else
     echo "Warning: Linux distribution not detected for installation. Exiting to avoid harm."; exit 1
 fi
 
-# Install some flatpak applications...
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-if has_command pacman; then
-    flatpak -y install flathub spotify
-else
+# Install some flatpak applications if not on Arch/Cachy...
+if ! has_command pacman; then
+    sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     flatpak -y install flathub spotify io.github.shiftey.Desktop com.mattjakeman.ExtensionManager
+    sudo flatpak override --filesystem=xdg-config/gtk-3.0
+    sudo flatpak override --filesystem=xdg-config/gtk-4.0
 fi
-sudo flatpak override --filesystem=xdg-config/gtk-3.0
-sudo flatpak override --filesystem=xdg-config/gtk-4.0
 
 # Clone some GitHub repos...
 if [ ! -d $HOME/Documents/Software/Git/WhiteSur-icon-theme ]; then
@@ -51,6 +49,16 @@ if [ ! -d $HOME/Documents/Linux-Utilities ]; then
     git clone https://github.com/washburn24/Linux-Utilities $HOME/Documents/Linux-Utilities
 else
     git -C $HOME/Documents/Linux-Utilities pull origin main
+fi
+if [ ! -d $HOME/Documents/Software/Git/dhruva ]; then
+    git clone https://github.com/NarkAgni/dhruva $HOME/Documents/Software/Git
+else
+    git -C $HOME/Documents/Software/Git/dhruva pull origin main
+fi
+if [ ! -d $HOME/Documents/Software/Git/rounded-windows ]; then
+    git clone https://github.com/Nathanaelrc/rounded-windows $HOME/Documents/Software/Git
+else
+    git -C $HOME/Documents/Software/Git/rounded-windows pull origin master
 fi
 
 # Install some gtk, icon, and Vim themes...

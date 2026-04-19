@@ -13,8 +13,8 @@ mv -f $HOME/.icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/
 git -C $HOME/Documents/Software/Git/dhruva pull origin main
 cd $HOME/Documents/Software/Git/dhruva
 make install
-git -C $HOME/Documents/Software/Git/rounded-corners pull origin main
-cd $HOME/Documents/Software/Git/rounded-corners
+git -C $HOME/Documents/Software/Git/rounded-windows pull origin master
+cd $HOME/Documents/Software/Git/rounded-windows
 chmod +x install.sh
 ./install.sh
 
