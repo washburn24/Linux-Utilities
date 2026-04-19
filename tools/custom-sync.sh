@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Refresh Github repos for whole system
-chmod +x github_sync.sh
-./github_sync.sh
+chmod +x github-sync.sh
+./github-sync.sh
 
 # Integrate icons to custom folder, rebuild tarball
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -n WhiteSurAlt
