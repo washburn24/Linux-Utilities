@@ -1,36 +1,43 @@
+#!/usr/bin/bash
+
 # Function to check for command availability senses package tool to determine distro
 has_command() {
     command -v "$1" &> /dev/null
 }
 
 # Change sudo timeout so the whole script runs on reasonable internet connections
-echo "Defaults timestamp_timeout=60" | sudo tee /etc/sudoers.d/timeout_settings
-sudo chmod 0440 /etc/sudoers.d/timeout_settings
+if  has_command pacman || has_command apt || has_command dnf || has_command zypper; then
+    echo "Defaults timestamp_timeout=60" | sudo tee /etc/sudoers.d/timeout_settings
+    sudo chmod 0440 /etc/sudoers.d/timeout_settings
+fi
 
 ## Install some native applications by distro...
 if has_command pacman; then
-    echo "pacman package manager found, installing apps for Arch/CachyOS..."
+    echo "Package manager found 'pacman'. Installing apps for Arch/CachyOS..."
     sudo pacman -Syu --noconfirm
     sudo pacman -Syu --noconfirm geary flameshot octopi diffuse gvim paru git     # Arch native repo
     sudo pacman -Syu --noconfirm gnome-calendar gnome-contacts gnome-weather gnome-maps
     sudo pacman -Syu --noconfirm apostrophe inkscape adw-gtk-theme python-pip octopi
-    sudo pacman -Syu --noconfirm github-desktop extension-manager spotify-launcher
+    sudo pacman -Syu --noconfirm github-desktop extension-manager gnome-terminal
     paru -Syu --noconfirm nautilus-open-in-ptyxis joplin-desktop google-chrome pycharm
     if has_command meld; then
-        sudo pacman -Ru --noconfirm alacritty meld cachyos-micro-settings micro
+        sudo pacman -Ru --noconfirm alacritty meld
+    fi
+    if ! has_command spotify-launcher; then    # Spotify breaks icon theme, so don't re-install
+        sudo pacman -Syu --noconfirm spotify-launcher
     fi
 elif has_command apt; then
-    echo "apt package manager found, installing apps for Debian/Ubuntu..."
+    echo "Package manager found 'apt. Installing apps for Debian/Ubuntu..."
     sudo apt -y install fastfetch gnome-contacts gnome-calendar geary flameshot   # Debian native repo
     sudo apt -y install git rsync gnome-tweaks flatpak gnome-software gnome-software-plugin-flatpak
 elif has_command dnf; then
-    echo "dnf package manager found, installing apps for Fedora..."
+    echo "Package manager found 'dnf'. Installing apps for Fedora..."
     sudo dnf -y install git gnome-tweaks geary flameshot gnome-software           # Fedora native repo
 elif has_command zypper; then
-    echo "zypper package manager found, installing apps for openSUSE..."
+    echo "Package manager found 'zypper'. Installing apps for openSUSE..."
     sudo zypper -n install git fastfetch geary flameshot inkscape gnome-tweaks    # openSUSE native repo
 else
-    echo "Warning: Linux distribution not detected for installation. Exiting to avoid harm."; exit 1
+    echo "Error! Linux distribution not detected for installation. Exiting to avoid harm."; exit 1
 fi
 
 # Install some flatpak applications if not on Arch/Cachy...
@@ -90,6 +97,7 @@ gsettings set org.gnome.mutter edge-tiling false
 dconf write /org/gnome/desktop/interface/icon-theme "'WhiteSur'"
 dconf write /org/gnome/shell/extensions/user-theme/name "'MacDark'"
 dconf write /org/gnome/desktop/interface/gtk-theme "'adw-gtk3'"
+dconf write /org/ghome/mutter/center-new-windows 'false'
 #gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
 
 # Controlling Just Perfection from the command line (move clock and notifications to the right)...
