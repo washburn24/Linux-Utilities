@@ -18,7 +18,7 @@ if has_command pacman; then
     sudo pacman -Syu --noconfirm geary flameshot octopi diffuse gvim paru git     # Arch native repo
     sudo pacman -Syu --noconfirm gnome-calendar gnome-contacts gnome-weather gnome-maps
     sudo pacman -Syu --noconfirm apostrophe inkscape adw-gtk-theme python-pip octopi
-    sudo pacman -Syu --noconfirm github-desktop extension-manager gnome-terminal
+    sudo pacman -Syu --noconfirm github-desktop extension-manager gnome-terminal dconf-editor
     paru -Syu --noconfirm nautilus-open-in-ptyxis joplin-desktop google-chrome pycharm
     if has_command meld; then
         sudo pacman -Ru --noconfirm alacritty meld
