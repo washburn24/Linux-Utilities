@@ -6,14 +6,11 @@ source $VIMRUNTIME/defaults.vim
 behave mswin    " Enables Windows-like copy/cut/paste and mouse selecting
 syntax on
 
+set guifont=DejaVu\ Sans\ Mono\ 11
+colorscheme codedark
 if has('gui_running')
-    set background=dark
-    colorscheme codedark
-    set guifont=DejaVu\ Sans\ Mono\ 11
-else
-    colorscheme default
+    set lines=55 columns=135
 endif
-set lines=65 columns=140
 
 " Fix text behavior and kill all extra files to minimize clutter
 set ignorecase smartcase

@@ -55,17 +55,22 @@ chmod +x github-sync.sh
 ./github-sync.sh
 
 # Install some gtk, icon, and Vim themes...
-if [[ ! -d $HOME/.icons/ || ! -d $HOME/.themes/ || ! -d $HOME/.vim/colors/ ]]; then
-    mkdir $HOME/.icons $HOME/.themes $HOME/.vim $HOME/.vim/colors
+if [[ ! -d $HOME/.local/share/icons/ || ! -d $HOME/.local/share/themes/ || ! -d $HOME/.vim/colors/ ]]; then
+    mkdir $HOME/.local/share/icons $HOME/.local/share/themes $HOME/.vim $HOME/.vim/colors
 fi
-$HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.icons -n WhiteSurAlt
-$HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.icons -n WhiteSurClean
-tar -C $HOME/.icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz
-rsync -a --ignore-existing $HOME/.icons/WhiteSurClean/* $HOME/.icons/WhiteSur/  # Sync only new icons to not overwrite custom changes
-cd $HOME/.icons
-tar -czf $HOME/.icons/WhiteSurCustom.tar.xz WhiteSur
-mv -f $HOME/.icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/Icons
+$HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.local/share/icons -n WhiteSurAlt
+$HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.local/share/icons -n WhiteSurClean
+tar -C $HOME/.local/share/icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz
+rsync -a --ignore-existing $HOME/.local/share/icons/WhiteSurClean/* $HOME/.local/share/icons/WhiteSur/  # Sync only new icons
+cd $HOME/.local/share/icons
+tar -czf $HOME/.local/share/icons/WhiteSurCustom.tar.xz WhiteSur
+mv -f $HOME/.local/share/icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/Icons
 cp $HOME/Documents/Linux-Utilities/config/Themes/codedark.vim $HOME/.vim/colors/
+if [ ! -f $HOME/.vim/vimrc ]; then  # Copy new dotfiles if they don't exist or if they exist and are newer update the archive
+    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME/.vim/vimrc
+else
+    rsync -a $HOME/.vim/vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc
+fi
 cd $HOME/Documents/Software/Git/dhruva
 make install
 cd $HOME/Documents/Software/Git/rounded-windows
@@ -74,14 +79,9 @@ chmod +x install.sh
 cd $HOME/Documents/Linux-Utilities/tools
 
 # Make some custom changes that are only relevant to me...
-rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.themes/MacLight/
-rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.themes/MacDark/
+rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.local/share/themes/MacLight/
+rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.local/share/themes/MacDark/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/alsa-base.conf /etc/modprobe.d/  # Bug fix for audio on Lenovo Yoga 9
-if [ ! -f $HOME/.vimrc ]; then  # Copy new dotfiles if they don't exist or if they exist and are newer update the archive
-    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME
-else
-    rsync -a $HOME/.vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/
-fi
 
 # Gnome general settings adjustments...
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll 'false'
