@@ -25,6 +25,8 @@ if has_command pacman; then
     fi
     if ! has_command spotify-launcher; then    # Spotify breaks icon theme, so don't re-install
         sudo pacman -Syu --noconfirm spotify-launcher
+    else
+        cp -f $HOME/Documents/Linux-Utilities/config/Dotfiles/config.fish $HOME/.config/fish/config.fish
     fi
 elif has_command apt; then
     echo "Package manager found 'apt. Installing apps for Debian/Ubuntu..."
@@ -82,6 +84,9 @@ cd $HOME/Documents/Linux-Utilities/tools
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.local/share/themes/MacLight/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.local/share/themes/MacDark/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/alsa-base.conf /etc/modprobe.d/  # Bug fix for audio on Lenovo Yoga 9
+if has_command pacman then;
+    rsync -a $HOME/.config/fish/config.fish $HOME/Documents/Linux-Utilities/config/Dotfiles/config.fish
+fi
 
 # Gnome general settings adjustments...
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll 'false'
