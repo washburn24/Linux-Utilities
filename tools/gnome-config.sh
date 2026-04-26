@@ -11,7 +11,7 @@ if  has_command pacman || has_command apt || has_command dnf || has_command zypp
     sudo chmod 0440 /etc/sudoers.d/timeout_settings
 fi
 
-## Install some native applications by distro...
+# Install some native applications by distro...
 if has_command pacman; then
     echo "Package manager found 'pacman'. Installing apps for Arch/CachyOS..."
     sudo pacman -Syu --noconfirm
@@ -30,8 +30,14 @@ if has_command pacman; then
     fi
 elif has_command apt; then
     echo "Package manager found 'apt. Installing apps for Debian/Ubuntu..."
+    sudo apt -y update
     sudo apt -y install fastfetch gnome-contacts gnome-calendar geary flameshot   # Debian native repo
-    sudo apt -y install git rsync gnome-tweaks flatpak gnome-software gnome-software-plugin-flatpak
+    sudo apt -y install git rsync gnome-tweaks flatpak gnome-software gir1.2-gmenu-3.0
+    sudo apt -y install gnome-shell-extension-manager gnome-software-plugin-flatpak
+    if [ ! -d $HOME/.local/share/themes ]; then
+        mkdir $HOME/.local/share/themes
+    fi
+    tar -C $HOME/.local/share/themes -xf $HOME/Documents/Linux-Utilities/config/Themes/adw-gtk3v6.5.tar.xz
 elif has_command dnf; then
     echo "Package manager found 'dnf'. Installing apps for Fedora..."
     sudo dnf -y install git gnome-tweaks geary flameshot gnome-software           # Fedora native repo
@@ -45,11 +51,14 @@ fi
 # Install some flatpak applications if not on Arch/Cachy...
 if ! has_command pacman; then
     sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    flatpak -y install flathub spotify io.github.shiftey.Desktop com.mattjakeman.ExtensionManager
+    flatpak -y install flathub spotify io.github.shiftey.Desktop
+    if ! has_command apt; then
+        faltpak -y install com.mattjakeman.ExtensionManager
+    fi
     sudo flatpak override --filesystem=xdg-config/gtk-3.0
     sudo flatpak override --filesystem=xdg-config/gtk-4.0
 else
-    echo "No Flatpak installed for Arch/CachyOS, use 'pacman -S flatpak to override'"
+    echo "No Flatpak installed for Arch/CachyOS, use 'pacman -S flatpak to install manually'"
 fi
 
 # Clone some GitHub repos...
