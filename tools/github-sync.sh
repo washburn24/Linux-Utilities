@@ -15,12 +15,17 @@ else
     git -C $HOME/Documents/Linux-Utilities pull origin main
 fi
 if [ ! -d $HOME/Documents/Software/Git/dhruva ]; then
-    git clone https://github.com/NarkAgni/dhruva $HOME/Documents/Software/Git
+    git clone https://github.com/NarkAgni/dhruva $HOME/Documents/Software/Git/dhruva
 else
     git -C $HOME/Documents/Software/Git/dhruva pull origin main
 fi
 if [ ! -d $HOME/Documents/Software/Git/rounded-windows ]; then
-    git clone https://github.com/Nathanaelrc/rounded-windows $HOME/Documents/Software/Git
+    git clone https://github.com/Nathanaelrc/rounded-windows $HOME/Documents/Software/Git/rounded-windows
 else
     git -C $HOME/Documents/Software/Git/rounded-windows pull origin master
+fi
+if [ ! -d $HOME/Documents/Software/Git/gnome-shell-extensions ]; then
+    git clone https://gitlab.gnome.org/GNOME/gnome-shell-extensions $HOME/Documents/Software/Git/gnome-shell-extensions
+else
+    git -C $HOME/Documents/Software/Git/gnome-shell-extensions pull origin main
 fi

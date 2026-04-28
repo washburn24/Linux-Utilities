@@ -53,12 +53,12 @@ if ! has_command pacman; then
     sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     flatpak -y install flathub spotify io.github.shiftey.Desktop
     if ! has_command apt; then
-        faltpak -y install com.mattjakeman.ExtensionManager
+        flatpak -y install com.mattjakeman.ExtensionManager
     fi
     sudo flatpak override --filesystem=xdg-config/gtk-3.0
     sudo flatpak override --filesystem=xdg-config/gtk-4.0
 else
-    echo "No Flatpak installed for Arch/CachyOS, use 'pacman -S flatpak to install manually'"
+    echo "No Flatpak automation for Arch/CachyOS, use 'pacman -S flatpak to install manually'"
 fi
 
 # Clone some GitHub repos...

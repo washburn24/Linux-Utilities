@@ -3,13 +3,14 @@
 
 " Set appearance stuff, text sizes, and initial window size
 source $VIMRUNTIME/defaults.vim
+set viminfo+=n~/.vim/cache/.viminfo
 behave mswin    " Enables Windows-like copy/cut/paste and mouse selecting
 syntax on
 
 set guifont=DejaVu\ Sans\ Mono\ 11
 colorscheme codedark
 if has('gui_running')
-    set lines=55 columns=135
+    set lines=58 columns=135
 endif
 
 " Fix text behavior and kill all extra files to minimize clutter
