@@ -24,8 +24,8 @@ if [ ! -d $HOME/Documents/Software/Git/rounded-windows ]; then
 else
     git -C $HOME/Documents/Software/Git/rounded-windows pull origin master
 fi
-if [ ! -d $HOME/Documents/Software/Git/gnome-shell-extensions ]; then
-    git clone https://gitlab.gnome.org/GNOME/gnome-shell-extensions $HOME/Documents/Software/Git/gnome-shell-extensions
+if [ ! -d $HOME/Documents/Software/Git/just-perfection ]; then
+    git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection $HOME/Documents/Software/Git/just-perfection
 else
-    git -C $HOME/Documents/Software/Git/gnome-shell-extensions pull origin main
+    git -C $HOME/Documents/Software/Git/just-perfection pull origin main
 fi

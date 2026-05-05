@@ -15,11 +15,12 @@ fi
 if has_command pacman; then
     echo "Package manager found 'pacman'. Installing apps for Arch/CachyOS..."
     sudo pacman -Syu --noconfirm
-    sudo pacman -Syu --noconfirm geary flameshot octopi diffuse gvim paru git     # Arch native repo
-    sudo pacman -Syu --noconfirm gnome-calendar gnome-contacts gnome-weather gnome-maps
-    sudo pacman -Syu --noconfirm apostrophe inkscape adw-gtk-theme python-pip octopi
-    sudo pacman -Syu --noconfirm github-desktop extension-manager gnome-terminal dconf-editor
-    paru -Syu --noconfirm nautilus-open-in-ptyxis joplin-desktop google-chrome pycharm
+    sudo pacman -Syu --noconfirm --needed geary flameshot octopi diffuse gvim   # Arch native repo
+    sudo pacman -Syu --noconfirm --needed paru git adw-gtk-theme python-pip glib2-devel
+    sudo pacman -Syu --noconfirm --needed gnome-calendar gnome-contacts gnome-weather
+    sudo pacman -Syu --noconfirm --needed apostrophe inkscape dconf-editor gnome-terminal
+    sudo pacman -Syu --noconfirm --needed github-desktop extension-manager gnome-maps octopi
+#    paru -Syu --noconfirm nautilus-open-in-ptyxis joplin-desktop google-chrome pycharm
     if has_command meld; then
         sudo pacman -Ru --noconfirm alacritty meld
     fi
@@ -62,8 +63,36 @@ else
 fi
 
 # Clone some GitHub repos...
-chmod +x github-sync.sh
-./github-sync.sh
+if [ ! -d $HOME/Documents/Software/Git/WhiteSur-icon-theme ]; then
+    git clone https://github.com/vinceliuice/WhiteSur-icon-theme $HOME/Documents/Software/Git/WhiteSur-icon-theme
+else
+    git -C $HOME/Documents/Software/Git/WhiteSur-icon-theme pull origin master
+fi
+if [ ! -d $HOME/Documents/Software/Git/WhiteSur-gtk-theme ]; then
+    git clone https://github.com/vinceliuice/WhiteSur-gtk-theme $HOME/Documents/Software/Git/WhiteSur-gtk-theme
+else
+    git -C $HOME/Documents/Software/Git/WhiteSur-gtk-theme pull origin master
+fi
+if [ ! -d $HOME/Documents/Linux-Utilities ]; then
+    git clone https://github.com/washburn24/Linux-Utilities $HOME/Documents/Linux-Utilities
+else
+    git -C $HOME/Documents/Linux-Utilities pull origin main
+fi
+if [ ! -d $HOME/Documents/Software/Git/dhruva ]; then
+    git clone https://github.com/NarkAgni/dhruva $HOME/Documents/Software/Git/dhruva
+else
+    git -C $HOME/Documents/Software/Git/dhruva pull origin main
+fi
+if [ ! -d $HOME/Documents/Software/Git/rounded-windows ]; then
+    git clone https://github.com/Nathanaelrc/rounded-windows $HOME/Documents/Software/Git/rounded-windows
+else
+    git -C $HOME/Documents/Software/Git/rounded-windows pull origin master
+fi
+if [ ! -d $HOME/Documents/Software/Git/just-perfection ]; then
+    git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection.git $HOME/Documents/Software/Git/just-perfection
+else
+    git -C $HOME/Documents/Software/Git/just-perfection pull origin main
+fi
 
 # Install some gtk, icon, and Vim themes...
 if [[ ! -d $HOME/.local/share/icons/ || ! -d $HOME/.local/share/themes/ || ! -d $HOME/.vim/colors/ ]]; then
@@ -82,18 +111,22 @@ if [ ! -f $HOME/.vim/vimrc ]; then  # Copy new dotfiles if they don't exist or i
 else
     rsync -a $HOME/.vim/vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc
 fi
+
+# Gnome extensions...
 cd $HOME/Documents/Software/Git/dhruva
 make install
 cd $HOME/Documents/Software/Git/rounded-windows
 chmod +x install.sh
 ./install.sh
+cd $HOME/Documents/Software/Git/just-perfection
+./scripts/build.sh -i
 cd $HOME/Documents/Linux-Utilities/tools
 
 # Make some custom changes that are only relevant to me...
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacLight/* $HOME/.local/share/themes/MacLight/
 rsync -a --ignore-existing $HOME/Documents/Linux-Utilities/config/Themes/MacDark/* $HOME/.local/share/themes/MacDark/
 sudo cp -f $HOME/Documents/Linux-Utilities/audio/alsa-base.conf /etc/modprobe.d/  # Bug fix for audio on Lenovo Yoga 9
-if has_command pacman then;
+if has_command pacman; then
     rsync -a $HOME/.config/fish/config.fish $HOME/Documents/Linux-Utilities/config/Dotfiles/config.fish
 fi
 
@@ -116,7 +149,7 @@ dconf write /org/ghome/mutter/center-new-windows 'false'
 
 # Controlling Just Perfection from the command line (move clock and notifications to the right)...
 dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position 1
-dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 10
+dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 20
 dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
 dconf write /org/gnome/shell/extensions/just-perfection/osd-position 3
 
