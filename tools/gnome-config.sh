@@ -107,7 +107,7 @@ cp $HOME/Documents/Linux-Utilities/config/Themes/codedark.vim $HOME/.vim/colors/
 if [ ! -f $HOME/.vim/vimrc ]; then  # Copy new dotfiles if they don't exist or if they exist and are newer update the archive
     cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME/.vim/vimrc
 else
-    rsync -a $HOME/.vim/vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc
+    rsync -ptgou $HOME/.vim/vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc
 fi
 
 # Gnome extensions...
