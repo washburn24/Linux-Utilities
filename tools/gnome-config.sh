@@ -25,9 +25,6 @@ if has_command pacman; then
     if has_command meld; then
         sudo pacman -Ru --noconfirm alacritty meld
     fi
-#    if ! has_command spotify-launcher; then    # Spotify breaks icon theme, so don't re-install
-#        sudo pacman -Syu --noconfirm spotify-launcher
-#    fi
 elif has_command apt; then
     echo "Package manager found 'apt. Installing apps for Debian/Ubuntu..."
     sudo apt -y update
