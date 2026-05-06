@@ -15,22 +15,23 @@ fi
 if has_command pacman; then
     echo "Package manager found 'pacman'. Installing apps for Arch/CachyOS..."
     sudo pacman -Syu --noconfirm
-    sudo pacman -Syu --noconfirm --needed geary flameshot octopi diffuse gvim   # Arch native repo
-    sudo pacman -Syu --noconfirm --needed paru git adw-gtk-theme python-pip glib2-devel
+    sudo pacman -Syu --noconfirm --needed geary flameshot octopi diffuse gvim git   # Arch native repo
+    sudo pacman -Syu --noconfirm --needed paru adw-gtk-theme python-pip glib2-devel
     sudo pacman -Syu --noconfirm --needed gnome-calendar gnome-contacts gnome-weather
-    sudo pacman -Syu --noconfirm --needed apostrophe inkscape dconf-editor gnome-terminal
-    sudo pacman -Syu --noconfirm --needed github-desktop extension-manager gnome-maps octopi
-#    paru -Syu --noconfirm nautilus-open-in-ptyxis joplin-desktop google-chrome pycharm
+    sudo pacman -Syu --noconfirm --needed apostrophe dconf-editor gnome-terminal octopi
+    sudo pacman -Syu --noconfirm --needed github-desktop extension-manager gnome-maps
+    sudo pacman -Syu --noconfirm --needed joplin-desktop spotify-launcher inkscape
+    paru -Syu --noconfirm --needed nautilus-open-in-ptyxis google-chrome pycharm
     if has_command meld; then
         sudo pacman -Ru --noconfirm alacritty meld
     fi
-    if ! has_command spotify-launcher; then    # Spotify breaks icon theme, so don't re-install
-        sudo pacman -Syu --noconfirm spotify-launcher
-    fi
+#    if ! has_command spotify-launcher; then    # Spotify breaks icon theme, so don't re-install
+#        sudo pacman -Syu --noconfirm spotify-launcher
+#    fi
 elif has_command apt; then
     echo "Package manager found 'apt. Installing apps for Debian/Ubuntu..."
     sudo apt -y update
-    sudo apt -y install fastfetch gnome-contacts gnome-calendar geary flameshot   # Debian native repo
+    sudo apt -y install fastfetch gnome-contacts gnome-calendar geary flameshot     # Debian native repo
     sudo apt -y install git rsync gnome-tweaks flatpak gnome-software gir1.2-gmenu-3.0
     sudo apt -y install gnome-shell-extension-manager gnome-software-plugin-flatpak
     if [ ! -d $HOME/.local/share/themes ]; then
@@ -39,10 +40,10 @@ elif has_command apt; then
     tar -C $HOME/.local/share/themes -xf $HOME/Documents/Linux-Utilities/config/Themes/adw-gtk3v6.5.tar.xz
 elif has_command dnf; then
     echo "Package manager found 'dnf'. Installing apps for Fedora..."
-    sudo dnf -y install git gnome-tweaks geary flameshot gnome-software           # Fedora native repo
+    sudo dnf -y install git gnome-tweaks geary flameshot gnome-software             # Fedora native repo
 elif has_command zypper; then
     echo "Package manager found 'zypper'. Installing apps for openSUSE..."
-    sudo zypper -n install git fastfetch geary flameshot inkscape gnome-tweaks    # openSUSE native repo
+    sudo zypper -n install git fastfetch geary flameshot inkscape gnome-tweaks      # openSUSE native repo
 else
     echo "Error! Linux distribution not detected for installation. Exiting to avoid harm."; exit 1
 fi
@@ -98,11 +99,11 @@ if [[ ! -d $HOME/.local/share/icons/ || ! -d $HOME/.local/share/themes/ || ! -d 
 fi
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.local/share/icons -n WhiteSurAlt
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.local/share/icons -n WhiteSurClean
-tar -C $HOME/.local/share/icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.xz
+tar -C $HOME/.local/share/icons -xf $HOME/Documents/Linux-Utilities/config/Icons/WhiteSurCustom.tar.gz
 rsync -a --ignore-existing $HOME/.local/share/icons/WhiteSurClean/* $HOME/.local/share/icons/WhiteSur/  # Sync only new icons
 cd $HOME/.local/share/icons
-tar -czf $HOME/.local/share/icons/WhiteSurCustom.tar.xz WhiteSur
-mv -f $HOME/.local/share/icons/WhiteSurCustom.tar.xz $HOME/Documents/Linux-Utilities/config/Icons
+tar -czf $HOME/.local/share/icons/WhiteSurCustom.tar.gz WhiteSur
+mv -f $HOME/.local/share/icons/WhiteSurCustom.tar.gz $HOME/Documents/Linux-Utilities/config/Icons
 cp $HOME/Documents/Linux-Utilities/config/Themes/codedark.vim $HOME/.vim/colors/
 if [ ! -f $HOME/.vim/vimrc ]; then  # Copy new dotfiles if they don't exist or if they exist and are newer update the archive
     cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME/.vim/vimrc
