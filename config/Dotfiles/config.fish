@@ -3,12 +3,17 @@ source /usr/share/cachyos-fish-config/cachyos-config.fish
 # Defining useful aliases and functions and claiming some back from Cachy's default config
 alias vi="vim"
 alias ff="fastfetch"
-if type -q eza    # Make sure eza exists before pointing ls to it
-    alias ls="eza --color=always --group-directories-first --icons"
-end
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 alias update="echo 'sudo pacman -Syu' ; sudo pacman -Syu"
 alias refresh="exec $SHELL"
 alias cls="clear"
+if type -q eza    # Make sure eza exists before pointing ls to it
+    alias ls="eza --color=always --group-directories-first --icons"
+end
 
 function sudo
     if functions -q -- $argv[1]
@@ -18,6 +23,5 @@ function sudo
 end
 
 function fish_greeting
-    pwd
-    ls
+    clear
 end
