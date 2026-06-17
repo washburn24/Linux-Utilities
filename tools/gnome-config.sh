@@ -91,8 +91,8 @@ else
 fi
 
 # Install some gtk, icon, and Vim themes...
-if [[ ! -d $HOME/.local/share/icons/ || ! -d $HOME/.local/share/themes/ || ! -d $HOME/.vim/colors/ ]]; then
-    mkdir $HOME/.local/share/icons $HOME/.local/share/themes $HOME/.vim $HOME/.vim/colors
+if [[ ! -d $HOME/.local/share/icons/ || ! -d $HOME/.local/share/themes/ || ! -d $HOME/.config/vim/colors/ ]]; then
+    mkdir $HOME/.local/share/icons $HOME/.local/share/themes $HOME/.config/vim $HOME/.config/vim/colors
 fi
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -a -d $HOME/.local/share/icons -n WhiteSurAlt
 $HOME/Documents/Software/Git/WhiteSur-icon-theme/install.sh -d $HOME/.local/share/icons -n WhiteSurClean
@@ -101,11 +101,11 @@ rsync -a --ignore-existing $HOME/.local/share/icons/WhiteSurClean/* $HOME/.local
 cd $HOME/.local/share/icons
 tar -czf $HOME/.local/share/icons/WhiteSurCustom.tar.gz WhiteSur
 mv -f $HOME/.local/share/icons/WhiteSurCustom.tar.gz $HOME/Documents/Linux-Utilities/config/Icons
-cp $HOME/Documents/Linux-Utilities/config/Themes/codedark.vim $HOME/.vim/colors/
-if [ ! -f $HOME/.vim/vimrc ]; then  # Copy new dotfiles if they don't exist or if they exist and are newer update the archive
-    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc $HOME/.vim/vimrc
+cp $HOME/Documents/Linux-Utilities/config/Themes/codedark.vim $HOME/.config/vim/colors/
+if [ ! -f $HOME/.config/vim/vimrc ]; then  # Copy new dotfiles if they don't exist or if they exist and are newer update the archive
+    cp $HOME/Documents/Linux-Utilities/config/Dotfiles/vimrc $HOME/.config/vim/vimrc
 else
-    rsync -ptgou $HOME/.vim/vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/.vimrc
+    rsync -ptgou $HOME/.config/vim/vimrc $HOME/Documents/Linux-Utilities/config/Dotfiles/vimrc
 fi
 
 # Gnome extensions...
