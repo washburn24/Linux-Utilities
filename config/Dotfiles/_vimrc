@@ -8,12 +8,14 @@ syntax on
 
 if has('gui_running')
     set background=dark
+    let g:codedark_modern=1
     colorscheme codedark
-    set guifont=fixedsys:h10
+    set guifont=Menlo-Bold:h14
 else
     colorscheme default
 endif
-set lines=70 columns=140
+set lines=80 columns=160
+set viminfofile=~/.vim/viminfo
 
 " Fix text behavior and kill all extra files to minimize clutter
 set ignorecase smartcase
